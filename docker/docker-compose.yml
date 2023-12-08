@@ -1,0 +1,36 @@
+version: '3' #docker version
+services:
+  www:
+    build: 
+      context: ./www
+      dockerfile: Dockerfile
+    volumes: 
+      - "../:/var/www/html" #sync and map project dir with container web dir
+      - "./www/php.ini:/usr/local/etc/php/php.ini" # Mount custom php.ini file for upload size changes
+    ports: 
+      - 80:80
+      - 443:443 #for ssl traffics
+  db:
+    # image: mysql:latest
+    container_name: db
+    build: 
+      context: ./db
+      dockerfile: Dockerfile
+    environment:
+      - MYSQL_DATABASE=LiveChat
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=password # this should live in a env var
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1 # equivalent to True
+    ports:
+      - 9999:3306
+    volumes:
+      - "../db:/docker-entrypoint-initdb.d" #sync persistent sql files with continer
+    # command: bash -c chmod -R 777 /docker-entrypoint-initdb.d/
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8001:80
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+
