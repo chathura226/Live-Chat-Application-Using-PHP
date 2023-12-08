@@ -10,24 +10,62 @@
         font-family: headerFont;
         src: url("ui/fonts/Summer-Vibes-OTF.otf");
     }
+
+    @font-face {
+        font-family: myFont;
+        src: url("ui/fonts/OpenSans-Regular.ttf");
+    }
+
     #wrapper {
         max-width: 900px;
         min-height: 500px;
         display: flex;
         margin: auto;
         color: white;
+        font-family: myFont;
+        font-size: 13px;
     }
 
     #left_panel {
         min-height: 500px;
         background-color: #27344b;
         flex: 1;
+        text-align: center;
+
     }
+
+    #profileImg {
+        width: 50%;
+        border: solid thin white;
+        border-radius: 50%;
+        margin: 10px;
+    }
+
+    #left_panel label{
+        width: 100%;
+        height: 20px;
+        display: block;
+        background-color: #404b56;
+        border-bottom: solid thin #ffffff55;
+        cursor: pointer;
+        padding: 5px;
+    }
+
+    #left_panel label:hover{
+        background-color: #778593;
+    }
+
+    #left_panel label img{
+        float: right;
+        width: 25px;
+    }
+
 
     #right_panel {
         min-height: 400px;
-        /*background-color: green;*/
+        background-color: green;
         flex: 4;
+        text-align: center;
     }
 
     #header {
@@ -57,12 +95,28 @@
 <body>
 <div id="wrapper">
     <div id="left_panel">
-
+        <div style="padding: 10px;">
+            <img id="profileImg"src="ui/images/user3.jpg" alt="User Image">
+            <br>
+            Sophie Willis
+            <br>
+            <span style="font-size: 12px;opacity: 0.5;">sophiewillis@gmail.com</span>
+            <br>
+            <br>
+            <br>
+            <div>
+                <label for="box">Chat <img src="ui/icons/chat.png" alt="Chat"></label>
+                <label for="">Contacts <img src="ui/icons/contacts.png" alt="Chat"></label>
+                <label for="">Settings <img src="ui/icons/settings.png" alt="Chat"></label>
+            </div>
+        </div>
     </div>
     <div id="right_panel">
         <div id="header">My Chat</div>
         <div id="container">
-            <div id="inner_left_panel"></div>
+            <div id="inner_left_panel">
+                <input type="checkbox" id="box" name="box">
+            </div>
             <div id="inner_right_panel"></div>
         </div>
     </div>
