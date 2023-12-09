@@ -49,6 +49,7 @@
         border-bottom: solid thin #ffffff55;
         cursor: pointer;
         padding: 5px;
+        transition: all 1s ease;
     }
 
     #left_panel label:hover{
@@ -90,6 +91,12 @@
         background-color: #f2f7f8;
         flex: 2;
         min-height: 430px;
+        transition: all 1.5s ease;
+    }
+
+    /*symbol ~ is for sibling*/
+    #radio_chat:not(:checked) ~ #inner_right_panel{
+        flex: 0;
     }
 </style>
 <body>
@@ -105,18 +112,25 @@
             <br>
             <br>
             <div>
-                <label for="box">Chat <img src="ui/icons/chat.png" alt="Chat"></label>
-                <label for="">Contacts <img src="ui/icons/contacts.png" alt="Chat"></label>
-                <label for="">Settings <img src="ui/icons/settings.png" alt="Chat"></label>
+                <label id="label_chat" for="radio_chat">Chat <img src="ui/icons/chat.png" alt="Chat"></label>
+                <label id="label_contacts" for="radio_contacts">Contacts <img src="ui/icons/contacts.png" alt="Chat"></label>
+                <label id="label_settings" for="radio_settings">Settings <img src="ui/icons/settings.png" alt="Chat"></label>
             </div>
         </div>
     </div>
     <div id="right_panel">
         <div id="header">My Chat</div>
         <div id="container">
+
+
             <div id="inner_left_panel">
-                <input type="checkbox" id="box" name="box">
+
             </div>
+
+            <input type="radio" id="radio_chat" name="radios_for_panels" style="display: none;">
+            <input type="radio" id="radio_contacts" name="radios_for_panels" style="display: none;">
+            <input type="radio" id="radio_settings" name="radios_for_panels" style="display: none;">
+
             <div id="inner_right_panel"></div>
         </div>
     </div>
