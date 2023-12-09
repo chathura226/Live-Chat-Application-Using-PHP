@@ -41,7 +41,7 @@
         margin: 10px;
     }
 
-    #left_panel label{
+    #left_panel label {
         width: 100%;
         height: 20px;
         display: block;
@@ -52,11 +52,11 @@
         transition: all 1s ease;
     }
 
-    #left_panel label:hover{
+    #left_panel label:hover {
         background-color: #778593;
     }
 
-    #left_panel label img{
+    #left_panel label img {
         float: right;
         width: 25px;
     }
@@ -95,7 +95,7 @@
     }
 
     /*symbol ~ is for sibling*/
-    #radio_chat:not(:checked) ~ #inner_right_panel{
+    #radio_chat:not(:checked) ~ #inner_right_panel {
         flex: 0;
     }
 </style>
@@ -103,7 +103,7 @@
 <div id="wrapper">
     <div id="left_panel">
         <div style="padding: 10px;">
-            <img id="profileImg"src="ui/images/user3.jpg" alt="User Image">
+            <img id="profileImg" src="ui/images/user3.jpg" alt="User Image">
             <br>
             Sophie Willis
             <br>
@@ -113,8 +113,10 @@
             <br>
             <div>
                 <label id="label_chat" for="radio_chat">Chat <img src="ui/icons/chat.png" alt="Chat"></label>
-                <label id="label_contacts" for="radio_contacts">Contacts <img src="ui/icons/contacts.png" alt="Chat"></label>
-                <label id="label_settings" for="radio_settings">Settings <img src="ui/icons/settings.png" alt="Chat"></label>
+                <label id="label_contacts" for="radio_contacts">Contacts <img src="ui/icons/contacts.png"
+                                                                              alt="Chat"></label>
+                <label id="label_settings" for="radio_settings">Settings <img src="ui/icons/settings.png"
+                                                                              alt="Chat"></label>
             </div>
         </div>
     </div>
@@ -137,3 +139,32 @@
 </div>
 </body>
 </html>
+
+<script type="text/javascript">
+    //fuction to return element when pass the ID. for make it easy. function name is underscore
+    function _(element) {
+        return document.getElementById(element);
+    }
+
+
+    let label = _("label_chat");
+    label.addEventListener("click", () => {
+        let inner_left_panel = _("inner_left_panel");
+
+        //ajax object to read data from server without refreshing
+        let ajax = new XMLHttpRequest();
+        //when ajax load.
+        ajax.onload = function () {
+            //200->OK , readyState=4 -> data have been returned
+            if (ajax.status == 200 || ajax.readyState == 4) {
+                inner_left_panel.innerHTML = ajax.responseText;
+            }
+
+        }
+
+        //true means read req asynchronously
+        ajax.open("POST","file.txt",true);
+        ajax.send();
+    })
+
+</script>
