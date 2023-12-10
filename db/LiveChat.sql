@@ -28,9 +28,9 @@ CREATE TABLE `user` (
   `userName` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(64) NOT NULL,
-  `image` varchar(1024) NOT NULL,
+  `image` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `createdAt` datetime NOT NULL,
-  `online` int NOT NULL,
+  `online` int DEFAULT NULL,
   `gender` enum('male','female') NOT NULL,
   PRIMARY KEY (`id`),
   KEY `userID` (`userID`),
@@ -38,7 +38,7 @@ CREATE TABLE `user` (
   KEY `email` (`email`),
   KEY `createdAt` (`createdAt`),
   KEY `online` (`online`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,6 +47,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,1784876893826717,'chathura','hhhh','111',NULL,'2023-12-10 06:54:11',NULL,'male'),(2,1784876924563059,'hima','jj','111k',NULL,'2023-12-10 06:54:40',NULL,'female'),(3,1784877035723461,'emily','emily@gmail.com','111',NULL,'2023-12-10 06:56:26',NULL,'female');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-10  2:35:50
+-- Dump completed on 2023-12-10  6:56:47
