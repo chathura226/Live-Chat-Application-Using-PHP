@@ -13,9 +13,11 @@
         My Chat
         <div style="font-size: 20px; font-family: myFont;">Signup <br><br></div>
     </div>
-    <form>
+    <form id="signupForm">
         <label for="username">Username: </label>
         <input type="text" name="username" placeholder="Enter your username"><br>
+        <label for="email">Email: </label>
+        <input type="text" name="email" placeholder="Enter your email address"><br>
         <label for="gender">Gender: </label>
         <input type="radio" name="gender" value="male">Male
         <input type="radio" name="gender" value="female">Female<br>
@@ -23,7 +25,7 @@
         <input type="password" name="password" placeholder="Enter your password"><br>
         <label for="confirmPassword">Confirm Password: </label>
         <input type="password" name="confirmPassword" placeholder="Re-enter your password"><br>
-        <input type="submit" value="Signup"><br>
+        <input type="submit" value="Signup" id="signup-button"><br>
     </form>
 </div>
 </body>
@@ -35,25 +37,39 @@
         return document.getElementById(element);
     }
 
+    function collectData(event){
+        // event.preventDefault();
+        let signupForm=_("signupForm");
+        let inputs=signupForm.getElementsByTagName("INPUT");
 
-    let label = _("label_chat");
-    label.addEventListener("click", () => {
-        let inner_left_panel = _("inner_left_panel");
+        let data={};
+        for (let i=inputs.length-1;i>=0;i--){
+            let key =inputs[i].name;
 
-        //ajax object to read data from server without refreshing
-        let ajax = new XMLHttpRequest();
-        //when ajax load.
-        ajax.onload = function () {
-            //200->OK , readyState=4 -> data have been returned
-            if (ajax.status == 200 || ajax.readyState == 4) {
-                inner_left_panel.innerHTML = ajax.responseText;
+            switch (key){
+                case "username":
+                    data.username=inputs[i].value;
+                    break;
+                case "email":
+                    data.email=inputs[i].value;
+                    break;
+                case "password":
+                    data.password=inputs[i].value;
+                    break;
+                case "confirmPassword":
+                    data.confirmPassword=inputs[i].value;
+                    break;
+                case "gender":
+                    if(inputs[i].checked) data.gender=inputs[i].value;
+                    break;
             }
-
         }
 
-        //true means read req asynchronously
-        ajax.open("POST", "file.txt", true);
-        ajax.send();
-    })
+        alert(JSON.stringify(data));
 
+
+    }
+
+    let signup_button=_("signup-button");
+    signup_button.addEventListener("click",collectData);
 </script>
