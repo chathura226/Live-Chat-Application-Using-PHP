@@ -1,0 +1,57 @@
+
+@font-face {
+    font-family: headerFont;
+    src: url("ui/fonts/Summer-Vibes-OTF.otf");
+}
+
+@font-face {
+    font-family: myFont;
+    src: url("ui/fonts/OpenSans-Regular.ttf");
+}
+
+#wrapper {
+    max-width: 900px;
+    min-height: 500px;
+    /*display: flex;*/
+    margin: auto;
+    color: grey;
+    font-family: myFont;
+    font-size: 13px;
+}
+
+.header {
+    margin: auto;
+    background-color: #485b6c;
+    font-size: 40px;
+    font-family: headerFont;
+    text-align: center;
+    width: 100%;
+    color: white;
+}
+
+form{
+    margin:auto;
+    padding: 10px;
+    width: 100%;
+    max-width: 400px;
+    /*background-color: #383e48;*/
+}
+input[type=radio]{
+    padding: 10px;
+    margin: 10px;
+    border: solid thin grey;
+    transform: scale(1.1);
+}
+input[type=text],input[type=password],input[type=submit]{
+    padding: 10px;
+    margin: 10px;
+    width: 100%;
+    border-radius:5px;
+    border: solid thin grey;
+}
+input[type=submit]{
+    width:105%;
+    cursor: pointer;
+    background-color: #2b5488;
+    color: white;
+}
