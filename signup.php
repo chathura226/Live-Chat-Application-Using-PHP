@@ -37,39 +37,59 @@
         return document.getElementById(element);
     }
 
-    function collectData(event){
-        // event.preventDefault();
-        let signupForm=_("signupForm");
-        let inputs=signupForm.getElementsByTagName("INPUT");
+    function collectData(event) {
+        event.preventDefault();
+        let signupForm = _("signupForm");
+        let inputs = signupForm.getElementsByTagName("INPUT");
 
-        let data={};
-        for (let i=inputs.length-1;i>=0;i--){
-            let key =inputs[i].name;
+        let data = {};
+        for (let i = inputs.length - 1; i >= 0; i--) {
+            let key = inputs[i].name;
 
-            switch (key){
+            switch (key) {
                 case "username":
-                    data.username=inputs[i].value;
+                    data.username = inputs[i].value;
                     break;
                 case "email":
-                    data.email=inputs[i].value;
+                    data.email = inputs[i].value;
                     break;
                 case "password":
-                    data.password=inputs[i].value;
+                    data.password = inputs[i].value;
                     break;
                 case "confirmPassword":
-                    data.confirmPassword=inputs[i].value;
+                    data.confirmPassword = inputs[i].value;
                     break;
                 case "gender":
-                    if(inputs[i].checked) data.gender=inputs[i].value;
+                    if (inputs[i].checked) data.gender = inputs[i].value;
                     break;
             }
         }
-
-        alert(JSON.stringify(data));
-
+        sendData(data, "signup");
 
     }
 
-    let signup_button=_("signup-button");
-    signup_button.addEventListener("click",collectData);
+    //type - type of data. what to do with them eg: signup, login etc...
+    function sendData(data, type) {
+        let xml = new XMLHttpRequest();
+
+        //listening
+        xml.onload = function () {
+            //readyState 4 means data got as a response successfully
+            //200 means everything is good
+            if (xml.readyState === 4 || xml.status === 200) {
+                alert(xml.responseText);
+            }
+        }
+
+        data.dataType=type;
+        let data_string=JSON.stringify(data);//converting to string
+        //sending
+        //true for asynchronous
+        xml.open("POST","api.php",true);
+        xml.send(data_string);
+
+    }
+
+    let signup_button = _("signup-button");
+    signup_button.addEventListener("click", collectData);
 </script>
