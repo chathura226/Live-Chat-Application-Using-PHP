@@ -1,4 +1,7 @@
 <?php
+
+$info=(object)[];
+
 $data['userID']=$DB->generateID();
 $data['createdAt']=date("Y-m-d H:i:s");
 
@@ -49,10 +52,19 @@ if($error=="") {
     $result = $DB->write($query, $data);
 
     if ($result) {
-        echo "Your profile was created successfully!";
+//        echo "Your profile was created successfully!";
+        $info->message="Your profile was created successfully!";
+        $info->type="info";
+        echo json_encode($info);
     } else {
-        echo "Error occurred while creating your account!";
+//        echo "Error occurred while creating your account!";
+        $info->message="Error occurred while creating your account!";
+        $info->type="error";
+        echo json_encode($info);
     }
 }else{
-    echo $error;
+//    echo $error;
+    $info->message=$error;
+    $info->type="error";
+    echo json_encode($info);
 }
