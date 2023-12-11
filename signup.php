@@ -36,8 +36,14 @@
     function _(element) {
         return document.getElementById(element);
     }
+    let signup_button = _("signup-button");
+    signup_button.addEventListener("click", collectData);
 
     function collectData(event) {
+        //disabling button
+        signup_button.disabled=true;
+        signup_button.value="Loading....";
+
         event.preventDefault();
         let signupForm = _("signupForm");
         let inputs = signupForm.getElementsByTagName("INPUT");
@@ -66,6 +72,8 @@
         }
         sendData(data, "signup");
 
+
+
     }
 
     //type - type of data. what to do with them eg: signup, login etc...
@@ -78,6 +86,10 @@
             //200 means everything is good
             if (xml.readyState === 4 || xml.status === 200) {
                 alert(xml.responseText);
+
+                //re enabling button
+                signup_button.disabled=false;
+                signup_button.value="Signup";
             }
         }
 
@@ -90,6 +102,5 @@
 
     }
 
-    let signup_button = _("signup-button");
-    signup_button.addEventListener("click", collectData);
+
 </script>

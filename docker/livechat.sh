@@ -8,7 +8,7 @@ if [ "$arg1" = "up" ]; then
     docker-compose up --build -d
     sleep 5
     echo "LiveChat started successfully!"
-    echo "LiveChat running @ : http://localhost/public"
+    echo "LiveChat running @ : http://localhost"
     echo "phpMyAdmin @ http://localhost:8001"
 elif [ "$arg1" = "down" ]; then
     echo "Exporting the database !............."
