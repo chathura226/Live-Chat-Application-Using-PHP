@@ -55,3 +55,24 @@ input[type=submit]{
     background-color: #2b5488;
     color: white;
 }
+
+
+.alert {
+    display: none;
+    /*position: fixed;*/
+    padding: 20px !important;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+    min-width: 400px;
+    background-color:transparent;
+    /*left: 50vw;*/
+    /*transform: translate(-50%, -50%);*/
+    /*z-index: 999 ;*/
+}
+
+.alert-danger {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+}

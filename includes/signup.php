@@ -43,8 +43,11 @@ if(empty($DATA_OBJ->password)){
     }
 }
 
-$data['gender']=$DATA_OBJ->gender;
-
+if(empty($DATA_OBJ->gender)){
+    $error .= "Please select a gender <br>";
+}else{
+    $data['gender']=$DATA_OBJ->gender;
+}
 
 
 if($error=="") {
@@ -54,17 +57,17 @@ if($error=="") {
     if ($result) {
 //        echo "Your profile was created successfully!";
         $info->message="Your profile was created successfully!";
-        $info->type="info";
+        $info->dataType="info";
         echo json_encode($info);
     } else {
 //        echo "Error occurred while creating your account!";
         $info->message="Error occurred while creating your account!";
-        $info->type="error";
+        $info->dataType="error";
         echo json_encode($info);
     }
 }else{
 //    echo $error;
     $info->message=$error;
-    $info->type="error";
+    $info->dataType="error";
     echo json_encode($info);
 }
