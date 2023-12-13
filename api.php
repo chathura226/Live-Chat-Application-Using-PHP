@@ -1,4 +1,15 @@
 <?php
+
+session_start();
+
+$info=(object)[];
+//check if logged in
+if(!isset($_SESSION['userID'])){
+    $info->logged_in=false;
+    echo json_encode($info);
+    die;
+}
+
 require_once("./classes/initialize.php");
 
 $DB=new Database();
@@ -14,4 +25,6 @@ if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="signup"){
 
     //signup
     include ("includes/signup.php");
+}else if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="user_info"){
+    echo "user info";
 }

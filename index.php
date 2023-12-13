@@ -70,14 +70,22 @@
 
         let data={};
         data.find=find;
-        data.type=type;
+        data.dataType=type;
         data=JSON.stringify(data)
         xml.open("POST","api.php",true);
         xml.send(data);
     }
 
     function handleResult(result,type){
-        alert(result);
+        if(result.trim()!=""){
+            let obj=JSON.parse(result);
+            if(!obj.logged_in){
+                // alert(result);
+                window.location="login.php";
+            }else{
+                alert(result);
+            }
+        }
     }
 
     let label = _("label_chat");
