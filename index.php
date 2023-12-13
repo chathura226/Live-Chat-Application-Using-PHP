@@ -10,12 +10,12 @@
 <body>
 <div id="wrapper">
     <div id="left_panel">
-        <div style="padding: 10px;">
-            <img id="profileImg" src="ui/images/user3.jpg" alt="User Image">
+        <div id="user_info" style="padding: 10px;">
+            <img id="profileImg" src="ui/images/user_image.png" alt="User Image">
             <br>
-            Sophie Willis
+            <span id="username">Username </span>
             <br>
-            <span style="font-size: 12px;opacity: 0.5;">sophiewillis@gmail.com</span>
+            <span id="useremail" style="font-size: 12px;opacity: 0.5;">Email</span>
             <br>
             <br>
             <br>
@@ -54,6 +54,31 @@
         return document.getElementById(element);
     }
 
+    //get user data on loading the page
+    get_data({},"user_info");
+
+    //find - object describing data that we want to find
+    //type - type of data
+    function get_data(find,type){
+        let xml=new XMLHttpRequest();
+
+        xml.onload=function (){
+            if(xml.readyState==4 || xml.status==200){
+                handleResult(xml.responseText,type);
+            }
+        }
+
+        let data={};
+        data.find=find;
+        data.type=type;
+        data=JSON.stringify(data)
+        xml.open("POST","api.php",true);
+        xml.send(data);
+    }
+
+    function handleResult(result,type){
+        alert(result);
+    }
 
     let label = _("label_chat");
     label.addEventListener("click", () => {
