@@ -27,6 +27,8 @@
                                                                               alt="Chat"></label>
             </div>
         </div>
+
+        <input type="button" value="Logout" id="logout">
     </div>
     <div id="right_panel">
         <div id="header">My Chat</div>
@@ -53,6 +55,13 @@
     function _(element) {
         return document.getElementById(element);
     }
+
+    //logout functionality
+    let logout=_("logout");
+    logout.addEventListener("click",()=>{
+        get_data({},"logout");
+    })
+
 
     //get user data on loading the page
     get_data({},"user_info");

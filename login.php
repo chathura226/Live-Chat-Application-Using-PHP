@@ -38,11 +38,12 @@ dxdc
     login_button.addEventListener("click", collectData);
 
     function collectData(event) {
+        event.preventDefault();
+
         //disabling button
         login_button.disabled = true;
         login_button.value = "Loading....";
 
-        event.preventDefault();
         let loginForm = _("loginForm");
         let inputs = loginForm.getElementsByTagName("INPUT");
 
