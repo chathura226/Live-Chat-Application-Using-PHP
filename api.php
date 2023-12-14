@@ -31,6 +31,10 @@ if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="signup"){
 }else if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="login"){
     //login
     include ("includes/login.php");
+}else if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="logout"){
+    //logout
+    include ("includes/logout.php");
 }else if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="user_info"){
-    echo "user info";
+    //userInfo
+    include("includes/userInfo.php");
 }

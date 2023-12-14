@@ -79,11 +79,21 @@
     function handleResult(result,type){
         if(result.trim()!=""){
             let obj=JSON.parse(result);
-            if(!obj.logged_in){
+            if(typeof(obj.logged_in)!="undefined" && !obj.logged_in){
                 // alert(result);
                 window.location="login.php";
             }else{
-                alert(result);
+                // alert(obj.userName);
+                switch (obj.dataType){
+                    case "userInfo":
+                        let username=_("username");
+                        let email=_("useremail");
+                        username.innerHTML=obj.userName;
+                        email.innerHTML=obj.email;
+                        break;
+                    case "contacts":
+                        break;
+                }
             }
         }
     }
