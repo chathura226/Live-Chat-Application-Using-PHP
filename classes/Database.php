@@ -38,6 +38,25 @@ class Database
         }
     }
 
+    //read from databse
+    public function read($query,$data_array=[])
+    {
+
+        $statement=$this->con->prepare($query);
+
+        $check=$statement->execute($data_array);
+
+        if($check){
+            $result=$statement->fetchAll(PDO::FETCH_OBJ);//fetching as an object
+            if(is_array($result) && count($result)>0){
+                return $result;
+            }
+            return false;
+        }else{
+            return false;
+        }
+    }
+
     public function generateID()
     {
         $uniqueId = uniqid();

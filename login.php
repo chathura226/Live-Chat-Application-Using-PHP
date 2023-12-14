@@ -75,6 +75,7 @@ dxdc
             //readyState 4 means data got as a response successfully
             //200 means everything is good
             if (xml.readyState === 4 || xml.status === 200) {
+                console.log(xml.responseText);
                 handleResults(xml.responseText);
 
                 //re enabling button
