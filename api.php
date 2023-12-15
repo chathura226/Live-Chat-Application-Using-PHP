@@ -37,4 +37,7 @@ if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="signup"){
 }else if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="user_info"){
     //userInfo
     include("includes/userInfo.php");
+}else if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="contacts"){
+    //userInfo
+    include("includes/contacts.php");
 }

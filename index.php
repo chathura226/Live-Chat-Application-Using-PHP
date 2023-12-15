@@ -26,7 +26,7 @@
                 <label id="label_settings" for="radio_settings">Settings <img src="ui/icons/settings.png"
                                                                               alt="Settings"></label>
                 <label id="logout" for="radio_logout">Logout <img src="ui/icons/logout.png"
-                                                                              alt="logout"></label>
+                                                                  alt="logout"></label>
             </div>
         </div>
 
@@ -38,6 +38,7 @@
 
             <div id="inner_left_panel">
 
+                <!-- to add contact info that get by ajax-->
             </div>
 
             <input type="radio" id="radio_chat" name="radios_for_panels" style="display: none;">
@@ -57,54 +58,61 @@
         return document.getElementById(element);
     }
 
+    function capitalizeFirstLetter(str) {
+        return `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
+    }
+
+
     //logout functionality
-    let logout=_("logout");
-    logout.addEventListener("click",()=>{
-        let ans=confirm("Are you sure you want to logout?");
-        if(ans) {
+    let logout = _("logout");
+    logout.addEventListener("click", () => {
+        let ans = confirm("Are you sure you want to logout?");
+        if (ans) {
             get_data({}, "logout");
         }
     })
 
 
     //get user data on loading the page
-    get_data({},"user_info");
+    get_data({}, "user_info");
 
     //find - object describing data that we want to find
     //type - type of data
-    function get_data(find,type){
-        let xml=new XMLHttpRequest();
+    function get_data(find, type) {
+        let xml = new XMLHttpRequest();
 
-        xml.onload=function (){
-            if(xml.readyState==4 || xml.status==200){
-                handleResult(xml.responseText,type);
+        xml.onload = function () {
+            if (xml.readyState == 4 || xml.status == 200) {
+                handleResult(xml.responseText, type);
             }
         }
 
-        let data={};
-        data.find=find;
-        data.dataType=type;
-        data=JSON.stringify(data)
-        xml.open("POST","api.php",true);
+        let data = {};
+        data.find = find;
+        data.dataType = type;
+        data = JSON.stringify(data)
+        xml.open("POST", "api.php", true);
         xml.send(data);
     }
 
-    function handleResult(result,type){
-        if(result.trim()!=""){
-            let obj=JSON.parse(result);
-            if(typeof(obj.logged_in)!="undefined" && !obj.logged_in){
+    function handleResult(result, type) {
+        if (result.trim() != "") {
+            // alert(result);
+            let obj = JSON.parse(result);
+            if (typeof (obj.logged_in) != "undefined" && !obj.logged_in) {
                 // alert(result);
-                window.location="login.php";
-            }else{
-                // alert(obj.userName);
-                switch (obj.dataType){
+                window.location = "login.php";
+            } else {
+                switch (obj.dataType) {
                     case "userInfo":
-                        let username=_("username");
-                        let email=_("useremail");
-                        username.innerHTML=obj.userName;
-                        email.innerHTML=obj.email;
+                        let username = _("username");
+                        let email = _("useremail");
+                        username.innerHTML = capitalizeFirstLetter(obj.userName);
+                        email.innerHTML = obj.email;
                         break;
                     case "contacts":
+                        let inner_left_panel = _("inner_left_panel");
+                        inner_left_panel.innerHTML=obj.message;
                         break;
                 }
             }
@@ -127,8 +135,14 @@
         }
 
         //true means read req asynchronously
-        ajax.open("POST","file.txt",true);
+        ajax.open("POST", "file.txt", true);
         ajax.send();
     })
 
+
+    //to get contact data
+    let contactLabel=_("label_contacts");
+    contactLabel.addEventListener("click",(e)=>{
+        get_data({},'contacts');
+    })
 </script>

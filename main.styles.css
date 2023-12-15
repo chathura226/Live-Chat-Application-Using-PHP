@@ -91,3 +91,18 @@
 #radio_chat:not(:checked) ~ #inner_right_panel {
     flex: 0;
 }
+
+
+#contact{
+    width: 200px;
+    height: 170px;
+    margin: 10px;
+    display: inline-block;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+#contact img{
+    width: 100%;
+
+}
