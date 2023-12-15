@@ -22,13 +22,14 @@
             <div>
                 <label id="label_chat" for="radio_chat">Chat <img src="ui/icons/chat.png" alt="Chat"></label>
                 <label id="label_contacts" for="radio_contacts">Contacts <img src="ui/icons/contacts.png"
-                                                                              alt="Chat"></label>
+                                                                              alt="Contacts"></label>
                 <label id="label_settings" for="radio_settings">Settings <img src="ui/icons/settings.png"
-                                                                              alt="Chat"></label>
+                                                                              alt="Settings"></label>
+                <label id="logout" for="radio_logout">Logout <img src="ui/icons/logout.png"
+                                                                              alt="logout"></label>
             </div>
         </div>
 
-        <input type="button" value="Logout" id="logout">
     </div>
     <div id="right_panel">
         <div id="header">My Chat</div>
@@ -59,7 +60,10 @@
     //logout functionality
     let logout=_("logout");
     logout.addEventListener("click",()=>{
-        get_data({},"logout");
+        let ans=confirm("Are you sure you want to logout?");
+        if(ans) {
+            get_data({}, "logout");
+        }
     })
 
 
