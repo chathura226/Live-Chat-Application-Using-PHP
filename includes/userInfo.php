@@ -8,7 +8,7 @@ $data['userID']=$_SESSION['userID'];
 
 
 if($error=="") {
-    $query = "SELECT * FROM user WHERE userID=:userID limit 1 ";
+    $query = "SELECT id,userID,userName,email,image,online,gender FROM user WHERE userID=:userID limit 1 ";
     $result = $DB->read($query, $data);
 
     if (is_array($result)) {
