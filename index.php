@@ -111,7 +111,15 @@
                         email.innerHTML = obj.email;
                         break;
                     case "contacts":
-                        let inner_left_panel = _("inner_left_panel");
+                        var inner_left_panel = _("inner_left_panel");
+                        inner_left_panel.innerHTML=obj.message;
+                        break;
+                    case "chats":
+                        var inner_left_panel = _("inner_left_panel");
+                        inner_left_panel.innerHTML=obj.message;
+                        break;
+                    case "settings":
+                        var inner_left_panel = _("inner_left_panel");
                         inner_left_panel.innerHTML=obj.message;
                         break;
                 }
@@ -119,26 +127,17 @@
         }
     }
 
-    let label = _("label_chat");
-    label.addEventListener("click", () => {
-        let inner_left_panel = _("inner_left_panel");
-
-        //ajax object to read data from server without refreshing
-        let ajax = new XMLHttpRequest();
-        //when ajax load.
-        ajax.onload = function () {
-            //200->OK , readyState=4 -> data have been returned
-            if (ajax.status == 200 || ajax.readyState == 4) {
-                inner_left_panel.innerHTML = ajax.responseText;
-            }
-
-        }
-
-        //true means read req asynchronously
-        ajax.open("POST", "file.txt", true);
-        ajax.send();
+    //get chat
+    let chatsLabel = _("label_chat");
+    chatsLabel.addEventListener("click",(e)=>{
+        get_data({},'chats');
     })
 
+    //get settings
+    let settingsLabel = _("label_settings");
+    settingsLabel.addEventListener("click",(e)=>{
+        get_data({},'settings');
+    })
 
     //to get contact data
     let contactLabel=_("label_contacts");

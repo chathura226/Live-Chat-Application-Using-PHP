@@ -38,6 +38,12 @@ if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="signup"){
     //userInfo
     include("includes/userInfo.php");
 }else if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="contacts"){
-    //userInfo
+    //contacts
     include("includes/contacts.php");
+}else if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="chats"){
+    //chats
+    include("includes/chats.php");
+}else if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="settings"){
+    //settings
+    include("includes/settings.php");
 }
