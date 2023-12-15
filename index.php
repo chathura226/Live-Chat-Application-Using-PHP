@@ -32,8 +32,11 @@
 
     </div>
     <div id="right_panel">
-        <div id="header">My Chat</div>
-        <div id="container">
+        <div id="header">
+            <!--loader-->
+            <div id="loader-con" class="loader-off"><img src="ui/icons/giphy.gif" alt="loader"></div>
+            My Chat</div>
+        <div id="container" style="display: flex;">
 
 
             <div id="inner_left_panel">
@@ -62,6 +65,8 @@
         return `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
     }
 
+    //loader
+    let loaderContainer=_("loader-con");
 
     //logout functionality
     let logout = _("logout");
@@ -79,10 +84,12 @@
     //find - object describing data that we want to find
     //type - type of data
     function get_data(find, type) {
+        loaderContainer.className="loader-on";
         let xml = new XMLHttpRequest();
 
         xml.onload = function () {
             if (xml.readyState == 4 || xml.status == 200) {
+                loaderContainer.className="loader-off";
                 handleResult(xml.responseText, type);
             }
         }
