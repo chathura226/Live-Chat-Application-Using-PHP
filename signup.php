@@ -29,6 +29,10 @@ dxdc
         <label for="confirmPassword">Confirm Password: </label>
         <input type="password" name="confirmPassword" placeholder="Re-enter your password"><br>
         <input type="submit" value="Signup" id="signup-button"><br>
+
+        <br>
+        <span style="display: block; text-align: center">Already have an account? <a href="login.php">Login here</a></span>
+
     </form>
 </div>
 </body>

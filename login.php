@@ -23,6 +23,10 @@ dxdc
         <label for="password">Password: </label>
         <input type="password" name="password" placeholder="Enter your password"><br>
         <input type="submit" value="Login" id="login-button"><br>
+
+        <br>
+        <span style="display: block; text-align: center">Don't have an account? <a href="signup.php">Signup here</a></span>
+
     </form>
 </div>
 </body>
