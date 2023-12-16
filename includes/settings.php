@@ -100,7 +100,7 @@ if (is_array($data)) {
             <input type="radio" name="gender" value="female"'.(($data->gender=='female')?'checked':'').'>Female<br>
             <label for="password">Password: </label>
             <input type="password" name="password" placeholder="Enter your password"><br>
-            <label for="confirmPassword">Confirm Password: </label>
+            <label for="confirmPassword">New Password: </label>
             <input type="password" name="newPassword" placeholder="Enter your new password (leave empty if not changing)"><br>
             <input type="submit" value="Save Settings" id="save-settings-button" onclick="collectData(event)"><br>
     

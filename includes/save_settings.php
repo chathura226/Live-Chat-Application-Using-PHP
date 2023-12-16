@@ -2,11 +2,40 @@
 
 $info=(object)[];
 
-$data['userID']=$DB->generateID();
-$data['createdAt']=date("Y-m-d H:i:s");
+$data['userID']=$_SESSION['userID'];
+
+//getting password to confirm the save settings
+$query = "SELECT password FROM user WHERE userID=:userID limit 1 ";
+$result = $DB->read($query, $data);
+
+
+if (is_array($result)) {
+    $result=$result[0];//since results will be an array of data
+    if($result->password==$DATA_OBJ->password){
+        //valid credentials.
+        //checking if user trying to change password
+        if(!empty($DATA_OBJ->newPassword)){ // user want to change password
+            $data['password']=$DATA_OBJ->newPassword;
+
+            if (strlen($DATA_OBJ->newPassword)<8){
+                $error .= "Password must be at least 8 characters long! <br>";
+            }
+        }else{
+            $data['password']=$DATA_OBJ->password;
+
+        }
+    }else{
+        $error .= "Incorrect credentials! <br>";
+
+    }
+
+} else {
+    $error .= "Error fetching data! <br>";
+}
+
 
 //validating username
-$data['username']=$DATA_OBJ->username;
+$data['userName']=$DATA_OBJ->username;
 if(empty($DATA_OBJ->username)){
     $error .= "Please enter a valid username! <br>";
 }else{
@@ -28,21 +57,10 @@ if(empty($DATA_OBJ->email)){
     }
 }
 
-//validating password
-$data['password']=$DATA_OBJ->password;
-$rePassword=$DATA_OBJ->confirmPassword;
-if(empty($DATA_OBJ->password)){
-    $error .= "Please enter a valid password! <br>";
-}else{
-    if ($DATA_OBJ->password != $rePassword){
-        $error .= "Passwords do not match! <br>";
-    }
 
-    if (strlen($DATA_OBJ->password)<8){
-        $error .= "Password must be at least 8 characters long! <br>";
-    }
-}
 
+
+//gender
 if(empty($DATA_OBJ->gender)){
     $error .= "Please select a gender <br>";
 }else{
@@ -51,17 +69,17 @@ if(empty($DATA_OBJ->gender)){
 
 
 if($error=="") {
-    $query = "INSERT INTO user (userID,username,email,password,createdAt,gender) values (:userID,:username,:email,:password,:createdAt,:gender) ";
+    $query = "UPDATE user SET userName= :userName, email= :email, gender= :gender, password= :password WHERE userID= :userID;";
     $result = $DB->write($query, $data);
 
     if ($result) {
 //        echo "Your profile was created successfully!";
-        $info->message="Your profile was created successfully!";
-        $info->dataType="info";
+        $info->message="Your profile was updated successfully!";
+        $info->dataType="save_settings";
         echo json_encode($info);
     } else {
 //        echo "Error occurred while creating your account!";
-        $info->message="Error occurred while creating your account!";
+        $info->message="Error occurred while updating your account!";
         $info->dataType="error";
         echo json_encode($info);
     }

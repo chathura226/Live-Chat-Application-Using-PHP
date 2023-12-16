@@ -5,8 +5,8 @@ $info=(object)[];
 $data['userID']=$DB->generateID();
 $data['createdAt']=date("Y-m-d H:i:s");
 
-//validating username
-$data['username']=$DATA_OBJ->username;
+//validating userName
+$data['userName']=$DATA_OBJ->username;
 if(empty($DATA_OBJ->username)){
     $error .= "Please enter a valid username! <br>";
 }else{
@@ -51,7 +51,7 @@ if(empty($DATA_OBJ->gender)){
 
 
 if($error=="") {
-    $query = "INSERT INTO user (userID,username,email,password,createdAt,gender) values (:userID,:username,:email,:password,:createdAt,:gender) ";
+    $query = "INSERT INTO user (userID,userName,email,password,createdAt,gender) values (:userID,:userName,:email,:password,:createdAt,:gender) ";
     $result = $DB->write($query, $data);
 
     if ($result) {

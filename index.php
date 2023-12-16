@@ -104,7 +104,7 @@
 
     function handleResult(result, type) {
         if (result.trim() != "") {
-            alert(result);
+            // console.log(result);
             let obj = JSON.parse(result);
             if (typeof (obj.logged_in) != "undefined" && !obj.logged_in) {
                 // alert(result);
@@ -131,8 +131,14 @@
                         var inner_left_panel = _("inner_left_panel");
                         inner_left_panel.innerHTML=obj.message;
                         break;
-                    case "save_settings":
-                        alert(obj.message);
+                    case "save_settings":// sucessful saving of settings
+                        get_data({}, "user_info");
+                        get_data({},'settings');
+                        break;
+                    case "error":
+                        let error=_("error");
+                        error.innerHTML=obj.message;
+                        error.style.display="block";
                         break;
 
                 }
