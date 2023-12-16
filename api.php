@@ -49,5 +49,9 @@ if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="signup"){
 }else if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="save_settings"){
     //save_settings
     include("includes/save_settings.php");
+}else if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="change_profile_image"){
+    //change_profile_image
 
 }
+
+

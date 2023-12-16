@@ -11,7 +11,7 @@
 <div id="wrapper">
     <div id="left_panel">
         <div id="user_info" style="padding: 10px;">
-            <img id="profileImg" src="" alt="User Image">
+            <img id="profileImg" src="" alt="User Image" style="width: 80px; height: 80px;">
             <br>
             <span id="username">Username </span>
             <br>
@@ -236,7 +236,43 @@
 
     }
 
+</script>
+
+<!--for profile image upload-->
+<script>
+    function upload_profile_image(files){
 
 
+        // console.log(files[0].name);
+        let xml = new XMLHttpRequest();
+        let changeImageLbl = _("changeImageLbl");
 
+        //disabling label
+        changeImageLbl.disabled = true;
+        changeImageLbl.innerHTML = "Uploading......";
+
+        let myForm=new FormData();
+
+        //listening
+        xml.onload = function () {
+            //readyState 4 means data got as a response successfully
+            //200 means everything is good
+            if (xml.readyState === 4 || xml.status === 200) {
+                // alert(xml.responseText);
+                get_data({}, "user_info");
+                get_data({},'settings');
+
+                //re enabling button
+                changeImageLbl.disabled = false;
+                changeImageLbl.innerHTML = "Change Image";
+            }
+        }
+
+        myForm.append('file',files[0]);
+        myForm.append('dataType',"change_profile_image");
+        //sending
+        //true for asynchronous
+        xml.open("POST", "uploader.php", true);
+        xml.send(myForm);
+    }
 </script>

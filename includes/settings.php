@@ -100,7 +100,10 @@ if (is_array($data)) {
       animation: appear 0.9s ease;">
         <div>
             <img src="'.$image.'" style="width: 150px; height: 150px; margin:10px; "/>
-            <input class="saveImage" type="button" value="Change Image" id="changeImageBtn"><br>
+            <label for="changeImageBtn" class="saveImage" id="changeImageLbl">
+            Change Image
+            </label>
+            <input onchange="upload_profile_image(this.files)" class="saveImage" type="file" value="Change Image" id="changeImageBtn" hidden><br>
         </div>
         <form id="signupForm">
             <label for="username">Username: </label>
