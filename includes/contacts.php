@@ -4,7 +4,21 @@ $query = "SELECT userName,image,gender FROM user ";
 $result = $DB->read($query, []);
 
 if (is_array($result)) {
-    $mydata = '<div style="text-align: center;">';
+    $mydata = '
+    <style>
+    @keyframes appear {
+        0%{
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        
+        100%{
+            opacity: 1;
+            transform: translateX(0px);
+        }
+    }
+</style>
+    <div style="text-align: center; animation: appear 0.9s ease;">';
 
     foreach ($result as $user) {
         $image = "";

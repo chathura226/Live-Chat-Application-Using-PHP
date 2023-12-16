@@ -79,13 +79,25 @@ if (is_array($data)) {
             border-color: #ebccd1;
             color: #a94442;
         }
+    @keyframes appear {
+        0%{
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        
+        100%{
+            opacity: 1;
+            transform: translateX(0px);
+        }
+    }
     </style>
     
     
     <div id="error" class="alert alert-danger"></div>
     <div style="display: grid;
       grid-template-columns: 1fr 3fr; /* Two columns with equal width */
-      grid-gap: 10px;">
+      grid-gap: 10px;
+      animation: appear 0.9s ease;">
         <div>
             <img src="'.$image.'" style="width: 150px; height: 150px; margin:10px; "/>
             <input class="saveImage" type="button" value="Change Image" id="changeImageBtn"><br>
