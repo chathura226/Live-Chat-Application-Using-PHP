@@ -13,6 +13,21 @@ if($error=="") {
 
     if (is_array($result)) {
         $result=$result[0];//since results will be an array of data
+
+        //check if image exist
+        $image = "";
+        if (empty($result->image) || !file_exists($result->image)) {//when image is set and exists
+            if($result->gender=='male'){//for male users with no image
+                $image="ui/images/male.jpg";
+            }else{//for female users with no image
+                $image="ui/images/female.png";
+            }
+            $result->image=$image;
+        }
+
+
+
+
         $result->dataType="userInfo";
         echo json_encode($result);
     } else {

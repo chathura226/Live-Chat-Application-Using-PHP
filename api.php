@@ -46,4 +46,8 @@ if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="signup"){
 }else if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="settings"){
     //settings
     include("includes/settings.php");
+}else if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="save_settings"){
+    //save_settings
+    include("includes/save_settings.php");
+
 }

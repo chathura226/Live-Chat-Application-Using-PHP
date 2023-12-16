@@ -101,103 +101,14 @@ if (is_array($data)) {
             <label for="password">Password: </label>
             <input type="password" name="password" placeholder="Enter your password"><br>
             <label for="confirmPassword">Confirm Password: </label>
-            <input type="password" name="newPassword" placeholder="Enter your new password"><br>
-            <input type="submit" value="Save Settings" id="signup-button"><br>
+            <input type="password" name="newPassword" placeholder="Enter your new password (leave empty if not changing)"><br>
+            <input type="submit" value="Save Settings" id="save-settings-button" onclick="collectData(event)"><br>
     
             <br>
     
     
         </form>
-    </div>
-    
-    
-    <script type="text/javascript">
-        //fuction to return element when pass the ID. for make it easy. function name is underscore
-        function _(element) {
-            return document.getElementById(element);
-        }
-    
-        let signup_button = _("signup-button");
-        signup_button.addEventListener("click", collectData);
-    
-        function collectData(event) {
-            //disabling button
-            signup_button.disabled = true;
-            signup_button.value = "Loading....";
-    
-            event.preventDefault();
-            let signupForm = _("signupForm");
-            let inputs = signupForm.getElementsByTagName("INPUT");
-    
-            let data = {};
-            for (let i = inputs.length - 1; i >= 0; i--) {
-                let key = inputs[i].name;
-    
-                switch (key) {
-                    case "username":
-                        data.username = inputs[i].value;
-                        break;
-                    case "email":
-                        data.email = inputs[i].value;
-                        break;
-                    case "password":
-                        data.password = inputs[i].value;
-                        break;
-                    case "confirmPassword":
-                        data.confirmPassword = inputs[i].value;
-                        break;
-                    case "gender":
-                        if (inputs[i].checked) data.gender = inputs[i].value;
-                        break;
-                }
-            }
-            sendData(data, "signup");
-    
-    
-        }
-    
-        //type - type of data. what to do with them eg: signup, login etc...
-        function sendData(data, type) {
-            let xml = new XMLHttpRequest();
-    
-            //listening
-            xml.onload = function () {
-                //readyState 4 means data got as a response successfully
-                //200 means everything is good
-                if (xml.readyState === 4 || xml.status === 200) {
-                    handleResults(xml.responseText);
-    
-                    //re enabling button
-                    signup_button.disabled = false;
-                    signup_button.value = "Signup";
-                }
-            }
-    
-            data.dataType = type;
-            let data_string = JSON.stringify(data);//converting to string
-            //sending
-            //true for asynchronous
-            xml.open("POST", "api.php", true);
-            xml.send(data_string);
-    
-        }
-    
-        function handleResults(results) {
-            let data = JSON.parse(results);
-    
-            if (data.dataType == "info") {
-                window.location = "index.php";
-            } else {//not info, response is abt errors
-                let error = _("error");
-                error.innerHTML = data.message;
-                error.style.display = "block";
-            }
-    
-        }
-    
-    
-    </script>
-    ';
+    </div>';
 }
 
 $info->message = $mydata;

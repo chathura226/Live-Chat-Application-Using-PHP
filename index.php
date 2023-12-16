@@ -11,7 +11,7 @@
 <div id="wrapper">
     <div id="left_panel">
         <div id="user_info" style="padding: 10px;">
-            <img id="profileImg" src="ui/images/user_image.png" alt="User Image">
+            <img id="profileImg" src="" alt="User Image">
             <br>
             <span id="username">Username </span>
             <br>
@@ -104,7 +104,7 @@
 
     function handleResult(result, type) {
         if (result.trim() != "") {
-            // alert(result);
+            alert(result);
             let obj = JSON.parse(result);
             if (typeof (obj.logged_in) != "undefined" && !obj.logged_in) {
                 // alert(result);
@@ -114,6 +114,8 @@
                     case "userInfo":
                         let username = _("username");
                         let email = _("useremail");
+                        let profileImage=_("profileImg");
+                        profileImage.src=obj.image;
                         username.innerHTML = capitalizeFirstLetter(obj.userName);
                         email.innerHTML = obj.email;
                         break;
@@ -129,6 +131,10 @@
                         var inner_left_panel = _("inner_left_panel");
                         inner_left_panel.innerHTML=obj.message;
                         break;
+                    case "save_settings":
+                        alert(obj.message);
+                        break;
+
                 }
             }
         }
@@ -151,4 +157,80 @@
     contactLabel.addEventListener("click",(e)=>{
         get_data({},'contacts');
     })
+</script>
+
+<!--for settings-->
+<script type="text/javascript">
+
+
+
+
+    function collectData(event) {
+
+        //disabling button
+        let save_setting_button = _("save-settings-button");
+        save_setting_button.disabled = true;
+        save_setting_button.value = "Loading....";
+
+        event.preventDefault();
+        let signupForm = _("signupForm");
+        let inputs = signupForm.getElementsByTagName("INPUT");
+
+        let data = {};
+        for (let i = inputs.length - 1; i >= 0; i--) {
+            let key = inputs[i].name;
+
+            switch (key) {
+                case "username":
+                    data.username = inputs[i].value;
+                    break;
+                case "email":
+                    data.email = inputs[i].value;
+                    break;
+                case "password":
+                    data.password = inputs[i].value;
+                    break;
+                case "newPassword":
+                    data.newPassword = inputs[i].value;
+                    break;
+                case "gender":
+                    if (inputs[i].checked) data.gender = inputs[i].value;
+                    break;
+            }
+        }
+        sendData(data, "save_settings");
+
+
+    }
+
+    //type - type of data. what to do with them eg: signup, login etc...
+    function sendData(data, type) {
+        let xml = new XMLHttpRequest();
+
+        //listening
+        xml.onload = function () {
+            //readyState 4 means data got as a response successfully
+            //200 means everything is good
+            if (xml.readyState === 4 || xml.status === 200) {
+                handleResult(xml.responseText);
+
+                //re enabling button
+                let save_setting_button = _("save-settings-button");
+                save_setting_button.disabled = false;
+                save_setting_button.value = "Save Settings";
+            }
+        }
+
+        data.dataType = type;
+        let data_string = JSON.stringify(data);//converting to string
+        //sending
+        //true for asynchronous
+        xml.open("POST", "api.php", true);
+        xml.send(data_string);
+
+    }
+
+
+
+
 </script>
