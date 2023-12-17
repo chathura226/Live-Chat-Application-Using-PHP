@@ -45,7 +45,7 @@
             </div>
 
             <input type="radio" id="radio_chat" name="radios_for_panels" style="display: none;">
-            <input type="radio" id="radio_contacts" name="radios_for_panels" style="display: none;">
+            <input type="radio" id="radio_contacts" name="radios_for_panels" style="display: none;" checked>
             <input type="radio" id="radio_settings" name="radios_for_panels" style="display: none;">
 
             <div id="inner_right_panel"></div>
@@ -84,6 +84,7 @@
 
     //get user data on loading the page
     get_data({}, "user_info");
+    get_data({},'contacts');
 
     //find - object describing data that we want to find
     //type - type of data
@@ -114,6 +115,8 @@
                 // alert(result);
                 window.location = "login.php";
             } else {
+                var inner_left_panel = _("inner_left_panel");
+                var inner_right_panel=_("inner_right_panel");
                 switch (obj.dataType) {
                     case "userInfo":
                         let username = _("username");
@@ -124,15 +127,15 @@
                         email.innerHTML = obj.email;
                         break;
                     case "contacts":
-                        var inner_left_panel = _("inner_left_panel");
+                        inner_right_panel.innerHTML='';
                         inner_left_panel.innerHTML=obj.message;
                         break;
                     case "chats":
-                        var inner_left_panel = _("inner_left_panel");
-                        inner_left_panel.innerHTML=obj.message;
+                        inner_left_panel.innerHTML=obj.user;
+                        inner_right_panel.innerHTML=obj.messages;
                         break;
                     case "settings":
-                        var inner_left_panel = _("inner_left_panel");
+                        inner_right_panel.innerHTML='';
                         inner_left_panel.innerHTML=obj.message;
                         break;
                     case "save_settings":// sucessful saving of settings

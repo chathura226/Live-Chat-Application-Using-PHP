@@ -12,6 +12,7 @@
 #wrapper {
     max-width: 900px;
     min-height: 500px;
+    max-height: 700px;
     display: flex;
     margin: auto;
     color: white;
@@ -79,12 +80,14 @@
     background-color: #383e48;
     flex: 1;
     min-height: 430px;
+    max-height: 630px;
 }
 
 #inner_right_panel {
     background-color: #f2f7f8;
     flex: 2;
     min-height: 430px;
+    max-height: 630px;
     transition: all 1.5s ease;
 }
 
@@ -141,4 +144,87 @@
 
 .loader-off{
     display: none;
+}
+
+
+/*//messages*/
+#message_left{
+    height: 70px;
+    margin: 10px;
+    padding: 2px;
+    padding-right: 8px;
+    background-color: #eee;
+    color: #444;
+    float: left;
+    box-shadow: 0px 0px 10px #aaa;
+    /*border-top-left-radius: 50%;*/
+    border-bottom-left-radius:50%;
+    position: relative;
+}
+#message_left img{
+    width: 60px;
+    height: 60px;
+    float: left;
+    margin: 2px;
+    border-radius: 50%;
+    border: solid 2px white;
+}
+
+#message_left div{
+    position: absolute;
+    /*left: -5px;*/
+    /*top: -5px;*/
+    left: -10px;
+    top: 20px;
+    width: 20px;
+    height: 20px;
+    background-color: #34474f;
+    border: solid 2px white;
+    border-radius: 50%;
+}
+
+#message_right{
+    height: 70px;
+    margin: 10px;
+    padding: 2px;
+    padding-right: 8px;
+    background-color: #fbffee ;
+    color: #444;
+    float: right;
+    box-shadow: 0px 0px 10px #aaa;
+    /*border-top-left-radius: 50%;*/
+    border-bottom-right-radius:50%;
+    position: relative;
+}
+#message_right img{
+    width: 60px;
+    height: 60px;
+    float: left;
+    margin: 2px;
+    border-radius: 50%;
+    border: solid 2px white;
+}
+
+#message_right div{
+    position: absolute;
+    /*left: -5px;*/
+    /*top: -5px;*/
+    right: -10px;
+    top: 20px;
+    width: 20px;
+    height: 20px;
+    background-color: #34474f;
+    border: solid 2px white;
+    border-radius: 50%;
+}
+
+#messages_container{
+    /*border: solid thin #888;*/
+    height: 578px;
+    overflow-y: scroll;
+}
+
+#messages_container_wrapper{
+    /*border: solid thin #888;*/
+    height: 100%;
 }
