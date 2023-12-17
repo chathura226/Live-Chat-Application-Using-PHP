@@ -276,3 +276,24 @@
         xml.send(myForm);
     }
 </script>
+
+
+<!--for drag and drop for uploading-->
+<script>
+    function handleDragAndDrop(e){
+        if(e.type=="dragover"){
+            e.preventDefault();
+            e.target.className="dragging";
+        }else if(e.type=="dragleave"){
+            e.preventDefault();
+            e.target.className="";
+        }else if(e.type=="drop"){
+            e.preventDefault();
+            e.target.className="";
+
+            upload_profile_image(e.dataTransfer.files);
+        }else{
+            // e.target.c
+        }
+    }
+</script>

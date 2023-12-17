@@ -90,6 +90,10 @@ if (is_array($data)) {
             transform: translateX(0px);
         }
     }
+    
+    .dragging{
+        border: dashed 2px #aaa;
+    }
     </style>
     
     
@@ -99,7 +103,8 @@ if (is_array($data)) {
       grid-gap: 10px;
       animation: appear 0.9s ease;">
         <div>
-            <img src="'.$image.'" style="width: 150px; height: 150px; margin:10px; "/>
+            Drag & Drop an image to change the profile picture<br>
+            <img ondragover="handleDragAndDrop(event)" ondragleave="handleDragAndDrop(event)" ondrop="handleDragAndDrop(event)" src="'.$image.'" style="width: 150px; height: 150px; margin:10px; "/>
             <label for="changeImageBtn" class="saveImage" id="changeImageLbl">
             Change Image
             </label>
@@ -124,18 +129,18 @@ if (is_array($data)) {
     
         </form>
     </div>';
-}
+
 
 $info->message = $mydata;
 $info->dataType = "settings";
 echo json_encode($info);
 
-die;
+}else {
 
-$info->message = "Error occured while fetching!";
-$info->dataType = "error";
-echo json_encode($info);
-
+    $info->message = "Error occured while fetching!";
+    $info->dataType = "error";
+    echo json_encode($info);
+}
 
 ?>
 
