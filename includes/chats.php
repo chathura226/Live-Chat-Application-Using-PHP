@@ -111,7 +111,7 @@ if (is_array($result)) {
     </div>
     <div style="display: flex; height: 50px;">
     <input style="flex:6" type="text" value=""  placeholder="Type your message"/>
-    <input style="flex:1" type="button" value="Send" />
+    <input style="flex:1;cursor: pointer;" type="button" value="Send" />
     </div>
 </div>
 ';
