@@ -1,5 +1,5 @@
 <?php
-    $mydata='Chats says hi';
+    $mydata=$DATA_OBJ->find->userID;
 
     $info->message = $mydata;
     $info->dataType = "chats";

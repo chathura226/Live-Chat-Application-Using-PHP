@@ -56,6 +56,10 @@
 </html>
 
 <script type="text/javascript">
+
+    //global variables
+    var CURRENT_CHAT_USER="";
+
     //fuction to return element when pass the ID. for make it easy. function name is underscore
     function _(element) {
         return document.getElementById(element);
@@ -295,5 +299,24 @@
         }else{
             // e.target.c
         }
+    }
+</script>
+
+
+<!--chat-->
+<script>
+    function startChat(e){
+
+        let userID=e.target.getAttribute("userID");
+        if(userID==null || userID==""){
+            userID=e.target.parentElement.getAttribute("userID");
+            // console.log(userID)
+        }
+
+        CURRENT_CHAT_USER=userID;
+
+        let radio_chat=_("radio_chat");
+        radio_chat.checked=true;
+        get_data({"userID":CURRENT_CHAT_USER},'chats');
     }
 </script>

@@ -1,7 +1,7 @@
 <?php
-
-$query = "SELECT userName,image,gender FROM user ";
-$result = $DB->read($query, []);
+$myID=$_SESSION['userID'];
+$query = "SELECT userID,userName,image,gender FROM user WHERE userID!= :userID";
+$result = $DB->read($query, ['userID'=>$myID]);
 
 if (is_array($result)) {
     $mydata = '
@@ -16,6 +16,15 @@ if (is_array($result)) {
             opacity: 1;
             transform: translateX(0px);
         }
+    }
+    
+    #contact{
+        cursor: pointer;
+        transition: all 0.5s cubic-bezier(.78,.11,.42,.85);
+    }
+    
+    #contact:hover{
+        transform: scale(1.1);
     }
 </style>
     <div style="text-align: center; animation: appear 0.9s ease;">';
@@ -32,7 +41,7 @@ if (is_array($result)) {
             }
         }
 
-        $mydata .= '    <div id="contact">
+        $mydata .= '    <div id="contact"  userID="'.$user->userID.'" onclick="startChat(event)">
         <img src="' . $image . '">
         <br>' . ucfirst($user->userName) . '</div>';
     }
