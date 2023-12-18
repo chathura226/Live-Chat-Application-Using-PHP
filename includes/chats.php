@@ -41,7 +41,7 @@ if (is_array($result)) {
     <div id="messages_container" >
         ';
    //left and right msgs from db
-    $query = "SELECT * FROM messages WHERE (sender= :sender && receiver=:receiver) || (sender= :receiver && receiver=:sender) ORDER BY date ASC";
+    $query = "SELECT * FROM messages WHERE (sender= :sender && receiver=:receiver) || (sender= :receiver && receiver=:sender) ORDER BY id ASC";
     $msgFromDB = $DB->read($query,['sender'=>$user->userID,'receiver'=>$_SESSION['userID']]);
     if(is_array($msgFromDB)){
         foreach ($msgFromDB as $data){
@@ -54,16 +54,8 @@ if (is_array($result)) {
     }
 
 
-    $messages.='
-    </div>
-    <div style="display: flex; height: 50px;">
-    <label for="file"><img src="ui/icons/clip.png" style="opacity: 0.;width: 30px;margin: 5px;cursor: pointer;"></label>
-    <input name="file" id="message_file" type="file" style="display: none;"/>
-    <input id="message_text" style="flex:6;border: solid thin #ccc; border-bottom: none;" type="text" value=""  placeholder="Type your message"/>
-    <input style="flex:1;cursor: pointer;" type="button" value="Send" onclick="send_message(event);" />
-    </div>
-</div>
-';
+    //controllers for message (send button input fields etc.)
+    $messages.=messageControls();
 
 
     $info->user = $mydata;

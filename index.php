@@ -35,7 +35,8 @@
         <div id="header">
             <!--loader-->
             <div id="loader-con" class="loader-off"><img src="ui/icons/giphy.gif" alt="loader"></div>
-            My Chat</div>
+            My Chat
+        </div>
         <div id="container" style="display: flex;">
 
 
@@ -58,7 +59,7 @@
 <script type="text/javascript">
 
     //global variables
-    var CURRENT_CHAT_USER="";
+    var CURRENT_CHAT_USER = "";
 
     //fuction to return element when pass the ID. for make it easy. function name is underscore
     function _(element) {
@@ -70,7 +71,7 @@
     }
 
     //loader
-    let loaderContainer=_("loader-con");
+    let loaderContainer = _("loader-con");
 
     //logout functionality
     let logout = _("logout");
@@ -84,17 +85,17 @@
 
     //get user data on loading the page
     get_data({}, "user_info");
-    get_data({},'contacts');
+    get_data({}, 'contacts');
 
     //find - object describing data that we want to find
     //type - type of data
     function get_data(find, type) {
-        loaderContainer.className="loader-on";
+        loaderContainer.className = "loader-on";
         let xml = new XMLHttpRequest();
 
         xml.onload = function () {
             if (xml.readyState == 4 || xml.status == 200) {
-                loaderContainer.className="loader-off";
+                loaderContainer.className = "loader-off";
                 handleResult(xml.responseText, type);
             }
         }
@@ -116,36 +117,45 @@
                 window.location = "login.php";
             } else {
                 var inner_left_panel = _("inner_left_panel");
-                var inner_right_panel=_("inner_right_panel");
+                var inner_right_panel = _("inner_right_panel");
                 switch (obj.dataType) {
                     case "userInfo":
                         let username = _("username");
                         let email = _("useremail");
-                        let profileImage=_("profileImg");
-                        profileImage.src=obj.image;
+                        let profileImage = _("profileImg");
+                        profileImage.src = obj.image;
                         username.innerHTML = capitalizeFirstLetter(obj.userName);
                         email.innerHTML = obj.email;
                         break;
                     case "contacts":
-                        inner_right_panel.innerHTML='';
-                        inner_left_panel.innerHTML=obj.message;
+                        inner_right_panel.innerHTML = '';
+                        inner_left_panel.innerHTML = obj.message;
                         break;
                     case "chats"://after sending messages, result also will come here
-                        inner_left_panel.innerHTML=obj.user;
-                        inner_right_panel.innerHTML=obj.messages;
+                        inner_left_panel.innerHTML = obj.user;
+                        inner_right_panel.innerHTML = obj.messages;
+
+                        //scrolling down
+                        let messages_container = _("messages_container");
+                        var message_text = _("message_text");
+                        //to start typing immedeiatel again and for scrolling down
+                        setTimeout(function (){
+                            messages_container.scrollTo(0, messages_container.scrollHeight);
+                            message_text.focus();
+                        },0);
                         break;
                     case "settings":
-                        inner_right_panel.innerHTML='';
-                        inner_left_panel.innerHTML=obj.message;
+                        inner_right_panel.innerHTML = '';
+                        inner_left_panel.innerHTML = obj.message;
                         break;
                     case "save_settings":// sucessful saving of settings
                         get_data({}, "user_info");
-                        get_data({},'settings');
+                        get_data({}, 'settings');
                         break;
                     case "error":
-                        let error=_("error");
-                        error.innerHTML=obj.message;
-                        error.style.display="block";
+                        let error = _("error");
+                        error.innerHTML = obj.message;
+                        error.style.display = "block";
                         break;
 
                 }
@@ -155,42 +165,47 @@
 
     //get chat
     let chatsLabel = _("label_chat");
-    chatsLabel.addEventListener("click",(e)=>{
-        get_data({},'chats');
+    chatsLabel.addEventListener("click", (e) => {
+        get_data({}, 'chats');
     })
 
     //get settings
     let settingsLabel = _("label_settings");
-    settingsLabel.addEventListener("click",(e)=>{
-        get_data({},'settings');
+    settingsLabel.addEventListener("click", (e) => {
+        get_data({}, 'settings');
     })
 
     //to get contact data
-    let contactLabel=_("label_contacts");
-    contactLabel.addEventListener("click",(e)=>{
-        get_data({},'contacts');
+    let contactLabel = _("label_contacts");
+    contactLabel.addEventListener("click", (e) => {
+        get_data({}, 'contacts');
     })
 
 
     //send message
-    function send_message(e){
-        var message_text=_("message_text");
-        if(message_text.value.trim()==""){
+    function send_message(e) {
+        var message_text = _("message_text");
+        if (message_text.value.trim() == "") {
             alert("Please enter the message that you need to send!")
             return;
         }
         // alert(message_text.value);
         get_data({
-            message:message_text.value.trim(),
-            userID:CURRENT_CHAT_USER//send curent chatting user as userID ( who we are sending it to)
-        },"send_message");
+            message: message_text.value.trim(),
+            userID: CURRENT_CHAT_USER//send curent chatting user as userID ( who we are sending it to)
+        }, "send_message");
+    }
+
+    //when press enter to send message
+    function pressedEnter(e) {
+        if (e.keyCode == 13) {//when its Enter key
+            send_message(e);
+        }
     }
 </script>
 
 <!--for settings-->
 <script type="text/javascript">
-
-
 
 
     function collectData(event) {
@@ -262,7 +277,7 @@
 
 <!--for profile image upload-->
 <script>
-    function upload_profile_image(files){
+    function upload_profile_image(files) {
 
 
         // console.log(files[0].name);
@@ -273,7 +288,7 @@
         changeImageLbl.disabled = true;
         changeImageLbl.innerHTML = "Uploading......";
 
-        let myForm=new FormData();
+        let myForm = new FormData();
 
         //listening
         xml.onload = function () {
@@ -282,7 +297,7 @@
             if (xml.readyState === 4 || xml.status === 200) {
                 // alert(xml.responseText);
                 get_data({}, "user_info");
-                get_data({},'settings');
+                get_data({}, 'settings');
 
                 //re enabling button
                 changeImageLbl.disabled = false;
@@ -290,8 +305,8 @@
             }
         }
 
-        myForm.append('file',files[0]);
-        myForm.append('dataType',"change_profile_image");
+        myForm.append('file', files[0]);
+        myForm.append('dataType', "change_profile_image");
         //sending
         //true for asynchronous
         xml.open("POST", "uploader.php", true);
@@ -302,19 +317,19 @@
 
 <!--for drag and drop for uploading-->
 <script>
-    function handleDragAndDrop(e){
-        if(e.type=="dragover"){
+    function handleDragAndDrop(e) {
+        if (e.type == "dragover") {
             e.preventDefault();
-            e.target.className="dragging";
-        }else if(e.type=="dragleave"){
+            e.target.className = "dragging";
+        } else if (e.type == "dragleave") {
             e.preventDefault();
-            e.target.className="";
-        }else if(e.type=="drop"){
+            e.target.className = "";
+        } else if (e.type == "drop") {
             e.preventDefault();
-            e.target.className="";
+            e.target.className = "";
 
             upload_profile_image(e.dataTransfer.files);
-        }else{
+        } else {
             // e.target.c
         }
     }
@@ -323,18 +338,18 @@
 
 <!--chat-->
 <script>
-    function startChat(e){
+    function startChat(e) {
 
-        let userID=e.target.getAttribute("userID");
-        if(userID==null || userID==""){
-            userID=e.target.parentElement.getAttribute("userID");
+        let userID = e.target.getAttribute("userID");
+        if (userID == null || userID == "") {
+            userID = e.target.parentElement.getAttribute("userID");
             // console.log(userID)
         }
 
-        CURRENT_CHAT_USER=userID;
+        CURRENT_CHAT_USER = userID;
 
-        let radio_chat=_("radio_chat");
-        radio_chat.checked=true;
-        get_data({"userID":CURRENT_CHAT_USER},'chats');
+        let radio_chat = _("radio_chat");
+        radio_chat.checked = true;
+        get_data({"userID": CURRENT_CHAT_USER}, 'chats');
     }
 </script>
