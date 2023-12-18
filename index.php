@@ -109,7 +109,7 @@
 
     function handleResult(result, type) {
         if (result.trim() != "") {
-            // console.log(result);
+            // alert(result);
             let obj = JSON.parse(result);
             if (typeof (obj.logged_in) != "undefined" && !obj.logged_in) {
                 // alert(result);

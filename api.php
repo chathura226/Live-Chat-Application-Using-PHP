@@ -55,3 +55,25 @@ if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="signup"){
 }
 
 
+//part for messages in left side
+function message_left($user){
+    return '<div id="message_left">
+            <div></div><!--for dot near image-->
+            <img src="' . $user->image . '">
+            <b>' . ucfirst($user->userName) . '</b><br>
+                 edwdwkndw<br>
+                <span style="font-size: 11px;color: white; position: absolute; bottom: 3px;right: 5px;">20 Jan 2023 10:00 am</span>
+        </div>';
+}
+
+//part for messages in right side
+function message_right($user)
+{
+    return '        <div id="message_right">
+            <div></div><!--for dot near image-->
+            <img src="' . $user->image . '" style="float: right;">
+            <b>' . ucfirst($user->userName) . '</b><br>
+                 edwdwkndw<br>
+                <span style="font-size: 11px;color: #999; position: absolute; bottom: 3px;left: 5px;">20 Jan 2023 10:00 am</span>
+        </div>';
+}

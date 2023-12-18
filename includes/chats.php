@@ -36,81 +36,18 @@ if (is_array($result)) {
     $messages='
 <div id="messages_container_wrapper" >
     <div id="messages_container" >
-        <div id="message_left">
-            <div></div><!--for dot near image-->
-            <img src="' . $image . '">
-            <b>' . ucfirst($user->userName) . '</b><br>
-                skcuhsndewndiuwndkwihdiwdhiwhdwidi edwdwkndw<br>
-                <span style="font-size: 11px;color: #999; position: absolute; bottom: 3px;right: 5px;">20 Jan 2023 10:00 am</span>
-        </div>
-        
-        <div id="message_right">
-            <div></div><!--for dot near image-->
-            <img src="' . $image . '" style="float: right;">
-            <b>' . ucfirst($user->userName) . '</b><br>
-                skcuhsndewndiuwndkwihdiwdhiwhdwidi edwdwkndw<br>
-                <span style="font-size: 11px;color: #999; position: absolute; bottom: 3px;left: 5px;">20 Jan 2023 10:00 am</span>
-        </div>
-        
-        <div id="message_left">
-            <div></div><!--for dot near image-->
-            <img src="' . $image . '">
-            <b>' . ucfirst($user->userName) . '</b><br>
-                skcuhsndewndiuwndkwihdiwdhiwhdwidi edwdwkndw<br>
-                <span style="font-size: 11px;color: #999; position: absolute; bottom: 3px;right: 5px;">20 Jan 2023 10:00 am</span>
-        </div>
-        
-        <div id="message_right">
-            <div></div><!--for dot near image-->
-            <img src="' . $image . '" style="float: right;">
-            <b>' . ucfirst($user->userName) . '</b><br>
-                skcuhsndewndiuwndkwihdiwdhiwhdwidi edwdwkndw<br>
-                <span style="font-size: 11px;color: #999; position: absolute; bottom: 3px;left: 5px;">20 Jan 2023 10:00 am</span>
-        </div>
-        
-        <div id="message_left">
-            <div></div><!--for dot near image-->
-            <img src="' . $image . '">
-            <b>' . ucfirst($user->userName) . '</b><br>
-                skcuhsndewndiuwndkwihdiwdhiwhdwidi edwdwkndw<br>
-                <span style="font-size: 11px;color: #999; position: absolute; bottom: 3px;right: 5px;">20 Jan 2023 10:00 am</span>
-        </div>
-        
-        <div id="message_right">
-            <div></div><!--for dot near image-->
-            <img src="' . $image . '" style="float: right;">
-            <b>' . ucfirst($user->userName) . '</b><br>
-                skcuhsndewndiuwndkwihdiwdhiwhdwidi edwdwkndw<br>
-                <span style="font-size: 11px;color: #999; position: absolute; bottom: 3px;left: 5px;">20 Jan 2023 10:00 am</span>
-        </div>
-        
-                <div id="message_right">
-            <div></div><!--for dot near image-->
-            <img src="' . $image . '" style="float: right;">
-            <b>' . ucfirst($user->userName) . '</b><br>
-                skcuhsndewndiuwndkwihdiwdhiwhdwidi edwdwkndw<br>
-                <span style="font-size: 11px;color: #999; position: absolute; bottom: 3px;left: 5px;">20 Jan 2023 10:00 am</span>
-        </div>
-        
-        
-                <div id="message_right">
-            <div></div><!--for dot near image-->
-            <img src="' . $image . '" style="float: right;">
-            <b>' . ucfirst($user->userName) . '</b><br>
-                skcuhsndewndiuwndkwihdiwdhiwhdwidi edwdwkndw<br>
-                <span style="font-size: 11px;color: #999; position: absolute; bottom: 3px;left: 5px;">20 Jan 2023 10:00 am</span>
-        </div>
-        
-                <div id="message_right">
-            <div></div><!--for dot near image-->
-            <img src="' . $image . '" style="float: right;">
-            <b>' . ucfirst($user->userName) . '</b><br>
-                skcuhsndewndiuwndkwihdiwdhiwhdwidi edwdwkndw<br>
-                <span style="font-size: 11px;color: #999; position: absolute; bottom: 3px;left: 5px;">20 Jan 2023 10:00 am</span>
-        </div>
+        ';
+    $messages.=message_left($user);
+    $messages.=message_right($user);
+    $messages.=message_left($user);
+    $messages.=message_left($user);
+    $messages.=message_right($user);
+    $messages.='
     </div>
     <div style="display: flex; height: 50px;">
-    <input style="flex:6" type="text" value=""  placeholder="Type your message"/>
+    <label for="file"><img src="ui/icons/clip.png" style="opacity: 0.;width: 30px;margin: 5px;cursor: pointer;"></label>
+    <input name="file" id="file" type="file" style="display: none;"/>
+    <input style="flex:6;border: solid thin #ccc; border-bottom: none;" type="text" value=""  placeholder="Type your message"/>
     <input style="flex:1;cursor: pointer;" type="button" value="Send" />
     </div>
 </div>
