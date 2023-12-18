@@ -1,5 +1,6 @@
 <?php
 
+//getting the current chatting user ( who we chat with)
 if(isset($DATA_OBJ->find->userID)){
     $ChatUserID = $DATA_OBJ->find->userID;
 }else{
@@ -14,6 +15,24 @@ $query = "SELECT userID,userName,image,gender FROM user WHERE userID= :userID li
 $result = $DB->read($query, ['userID' => $ChatUserID]);
 
 if (is_array($result)) {
+
+    //arr array to store data for prepared statement
+    $arr['message']=$DATA_OBJ->find->message;
+    $arr['date']=date("Y-m-d H:i:s");
+    $arr['sender']=$_SESSION['userID'];
+    $arr['receiver']=$DATA_OBJ->find->userID;
+    $arr['msgID']=getRandomStringMax(60);
+
+    //if msgID exist, get that as the msgID (unique for a chat between a sender and reciever)
+    $query = "SELECT * FROM messages WHERE sender= :sender && receiver=:receiver limit 1";
+    $resultNew = $DB->read($query,['sender'=>$arr['sender'],'receiver'=>$arr['receiver']]);
+    if(is_array($resultNew)){
+        $arr['msgID']=$resultNew[0]->msgID;
+    }
+
+    $query="INSERT INTO messages (sender,receiver,message,date,msgID) values (:sender,:receiver,:message,:date,:msgID)";
+    $DB->write($query, $arr);
+
     //user found
     $user = $result[0];
 
@@ -31,16 +50,25 @@ if (is_array($result)) {
     $user->image=$image;
 
 
-
     $mydata = 'Now chatting with:<br>   <div id="active_contact"  userID="'.$user->userID.'" >
-            <img src="' . $user->image . '">
+            <img src="' . $image . '">
             ' . ucfirst($user->userName) . '</div>';
 
     $messages='
 <div id="messages_container_wrapper" >
     <div id="messages_container" >
         ';
-   //left and right msgs from db
+    //left and right chats
+
+    //reading from db
+    $msgID=$arr['msgID'];
+    $query = "SELECT * FROM messages WHERE msgID=:msgID";
+    $msgFromDB = $DB->read($query,['msgID'=>$msgID]);
+    if(is_array($msgFromDB)){
+        foreach ($msgFromDB as $data){
+            $messages.=message_right($data,$_SESSION['user']);//using user obj in session for user data of logged user
+        }
+    }
 
 
 
@@ -69,6 +97,20 @@ if (is_array($result)) {
 }
 
 
+//to generate random character string
+function getRandomStringMax($length)
+{
+    $array=array(0,1,2,3,4,5,6,7,8,9,'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z','A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+    $text="";
+    $length=rand(4,$length);
+
+    for($i=0;$i<$length;$i++){
+        $random=rand(0,61);
+        $text.=$array[$random];
+    }
+
+    return $text;
+}
 ?>
 
 

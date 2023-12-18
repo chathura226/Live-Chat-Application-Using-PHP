@@ -49,31 +49,61 @@ if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="signup"){
 }else if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="save_settings"){
     //save_settings
     include("includes/save_settings.php");
-}else if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="change_profile_image"){
-    //change_profile_image
-
+}else if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType=="send_message"){
+    //send_message
+    include("includes/send_message.php");
 }
 
 
 //part for messages in left side
-function message_left($user){
+function message_left($data,$user){
     return '<div id="message_left">
             <div></div><!--for dot near image-->
             <img src="' . $user->image . '">
             <b>' . ucfirst($user->userName) . '</b><br>
-                 edwdwkndw<br>
+                 $data->message<br><br>
                 <span style="font-size: 11px;color: white; position: absolute; bottom: 3px;right: 5px;">20 Jan 2023 10:00 am</span>
         </div>';
 }
 
 //part for messages in right side
-function message_right($user)
+function message_right($data,$user)
 {
     return '        <div id="message_right">
             <div></div><!--for dot near image-->
             <img src="' . $user->image . '" style="float: right;">
             <b>' . ucfirst($user->userName) . '</b><br>
-                 edwdwkndw<br>
-                <span style="font-size: 11px;color: #999; position: absolute; bottom: 3px;left: 5px;">20 Jan 2023 10:00 am</span>
+                 '.$data->message.'<br><br>
+                <span style="font-size: 11px;color: #999; position: absolute; bottom: 3px;left: 5px;">'.$data->date.'</span>
         </div>';
+}
+
+
+//update Session when something change to change user data in session
+function updateSession(){
+
+    $query = "SELECT * FROM user WHERE userID=:userID limit 1 ";
+    $result = $DB->read($query, ['userID'=>$_SESSION['userID']]);
+    if (is_array($result)) {
+        $result = $result[0];
+        //decision abt the image
+        $image = "";
+        if (!empty($result->image) && file_exists($result->image)) {//when image is set and exists
+            $image = $result->image;
+        } else {//when image is not set
+            if ($result->gender == 'male') {//for male users with no image
+                $image = "ui/images/male.jpg";
+            } else {//for female users with no image
+                $image = "ui/images/female.png";
+            }
+        }
+        $result->image = $image;
+
+        $user_data['image'] = $result->image;
+        $user_data['userID'] = $result->userID;
+        $user_data['gender'] = $result->gender;
+        $user_data['email'] = $result->email;
+        $user_data['userName'] = $result->userName;
+        $_SESSION['user'] = (object)$user_data;//saving user data as an obj in session
+    }
 }

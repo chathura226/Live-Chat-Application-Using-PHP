@@ -109,7 +109,7 @@
 
     function handleResult(result, type) {
         if (result.trim() != "") {
-            // alert(result);
+            alert(result);
             let obj = JSON.parse(result);
             if (typeof (obj.logged_in) != "undefined" && !obj.logged_in) {
                 // alert(result);
@@ -130,7 +130,7 @@
                         inner_right_panel.innerHTML='';
                         inner_left_panel.innerHTML=obj.message;
                         break;
-                    case "chats":
+                    case "chats"://after sending messages, result also will come here
                         inner_left_panel.innerHTML=obj.user;
                         inner_right_panel.innerHTML=obj.messages;
                         break;
@@ -170,6 +170,21 @@
     contactLabel.addEventListener("click",(e)=>{
         get_data({},'contacts');
     })
+
+
+    //send message
+    function send_message(e){
+        var message_text=_("message_text");
+        if(message_text.value.trim()==""){
+            alert("Please enter the message that you need to send!")
+            return;
+        }
+        // alert(message_text.value);
+        get_data({
+            message:message_text.value.trim(),
+            userID:CURRENT_CHAT_USER//send curent chatting user as userID ( who we are sending it to)
+        },"send_message");
+    }
 </script>
 
 <!--for settings-->
