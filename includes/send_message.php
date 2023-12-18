@@ -24,7 +24,7 @@ if (is_array($result)) {
     $arr['msgID']=getRandomStringMax(60);
 
     //if msgID exist, get that as the msgID (unique for a chat between a sender and reciever)
-    $query = "SELECT * FROM messages WHERE sender= :sender && receiver=:receiver limit 1";
+    $query = "SELECT * FROM messages WHERE (sender= :sender && receiver=:receiver) || (sender= :receiver && receiver=:sender) limit 1";
     $resultNew = $DB->read($query,['sender'=>$arr['sender'],'receiver'=>$arr['receiver']]);
     if(is_array($resultNew)){
         $arr['msgID']=$resultNew[0]->msgID;
@@ -62,11 +62,15 @@ if (is_array($result)) {
 
     //reading from db
     $msgID=$arr['msgID'];
-    $query = "SELECT * FROM messages WHERE msgID=:msgID";
+    $query = "SELECT * FROM messages WHERE msgID=:msgID ORDER BY date ASC";
     $msgFromDB = $DB->read($query,['msgID'=>$msgID]);
     if(is_array($msgFromDB)){
         foreach ($msgFromDB as $data){
-            $messages.=message_right($data,$_SESSION['user']);//using user obj in session for user data of logged user
+            if($data->sender==$_SESSION['userID']){//when the msg was sent by the logged user
+                $messages.=message_right($data,$_SESSION['user']);//using user obj in session for user data of logged user
+            }else{//when msg is sent by the chatting user
+                $messages.=message_left($data,$user);
+            }
         }
     }
 

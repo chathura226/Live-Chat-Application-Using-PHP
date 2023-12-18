@@ -61,8 +61,8 @@ function message_left($data,$user){
             <div></div><!--for dot near image-->
             <img src="' . $user->image . '">
             <b>' . ucfirst($user->userName) . '</b><br>
-                 $data->message<br><br>
-                <span style="font-size: 11px;color: white; position: absolute; bottom: 3px;right: 5px;">20 Jan 2023 10:00 am</span>
+                 '.$data->message.'<br><br>
+                <span style="font-size: 11px;color: white; position: absolute; bottom: 3px;right: 5px;">'.$data->date.'</span>
         </div>';
 }
 

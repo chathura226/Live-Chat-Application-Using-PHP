@@ -41,7 +41,17 @@ if (is_array($result)) {
     <div id="messages_container" >
         ';
    //left and right msgs from db
-
+    $query = "SELECT * FROM messages WHERE (sender= :sender && receiver=:receiver) || (sender= :receiver && receiver=:sender) ORDER BY date ASC";
+    $msgFromDB = $DB->read($query,['sender'=>$user->userID,'receiver'=>$_SESSION['userID']]);
+    if(is_array($msgFromDB)){
+        foreach ($msgFromDB as $data){
+            if($data->sender==$_SESSION['userID']){//when the msg was sent by the logged user
+                $messages.=message_right($data,$_SESSION['user']);//using user obj in session for user data of logged user
+            }else{//when msg is sent by the chatting user
+                $messages.=message_left($data,$user);
+            }
+        }
+    }
 
 
     $messages.='
