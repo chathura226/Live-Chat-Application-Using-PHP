@@ -45,13 +45,6 @@ if (isset($DATA_OBJ->find->userID)) {
 
                     if($seen && empty($data->seen) &&  !empty($data->received) ) {
 
-                        $file = 'test.txt'; // Replace 'your_file.txt' with your file name or path
-                        $content_to_append = $seen."\n"; // Content you want to append
-                        // Append content to the file
-                        file_put_contents($file, $content_to_append, FILE_APPEND);
-
-
-
                         $DB->write("UPDATE messages SET seen=:seen WHERE id=:id limit 1;", ['seen' => date("Y-m-d H:i:s"), 'id' => $data->id]);
                     }
                     $messages .= message_left($data, $user);
