@@ -110,7 +110,7 @@
 
     function handleResult(result, type) {
         if (result.trim() != "") {
-            // alert(result);
+            console.log(result);
             let obj = JSON.parse(result);
             if (typeof (obj.logged_in) != "undefined" && !obj.logged_in) {
                 // alert(result);
@@ -136,7 +136,7 @@
                         inner_right_panel.innerHTML = obj.messages;
 
                         //scrolling down
-                        let messages_container = _("messages_container");
+                        var messages_container = _("messages_container");
                         var message_text = _("message_text");
                         //to start typing immedeiatel again and for scrolling down
                         setTimeout(function (){
@@ -152,6 +152,10 @@
                         get_data({}, "user_info");
                         get_data({}, 'settings');
                         break;
+                    case "chats_refresh":
+                        var messages_container = _("messages_container");
+                        messages_container.innerHTML=obj.messages;
+                        break;
                     case "error":
                         let error = _("error");
                         error.innerHTML = obj.message;
@@ -163,21 +167,25 @@
         }
     }
 
+
     //get chat
     let chatsLabel = _("label_chat");
     chatsLabel.addEventListener("click", (e) => {
+        CURRENT_CHAT_USER="";//to stop setInterval function that req new messages every 5 sec
         get_data({}, 'chats');
     })
 
     //get settings
     let settingsLabel = _("label_settings");
     settingsLabel.addEventListener("click", (e) => {
+        CURRENT_CHAT_USER="";//to stop setInterval function that req new messages every 5 sec
         get_data({}, 'settings');
     })
 
     //to get contact data
     let contactLabel = _("label_contacts");
     contactLabel.addEventListener("click", (e) => {
+        CURRENT_CHAT_USER="";//to stop setInterval function that req new messages every 5 sec
         get_data({}, 'contacts');
     })
 
@@ -195,6 +203,9 @@
             userID: CURRENT_CHAT_USER//send curent chatting user as userID ( who we are sending it to)
         }, "send_message");
     }
+
+
+
 
     //when press enter to send message
     function pressedEnter(e) {
@@ -352,4 +363,11 @@
         radio_chat.checked = true;
         get_data({"userID": CURRENT_CHAT_USER}, 'chats');
     }
+
+    //req msg every 5 sec
+    setInterval(function (){
+        if(CURRENT_CHAT_USER!=""){
+            get_data({"userID": CURRENT_CHAT_USER}, 'chats_refresh');
+        }
+    },5000);
 </script>

@@ -54,7 +54,8 @@ if (is_array($result)) {
             <img src="' . $image . '">
             ' . ucfirst($user->userName) . '</div>';
 
-    $messages='
+    $messages="";
+    $messages .='
 <div id="messages_container_wrapper" >
     <div id="messages_container" >
         ';

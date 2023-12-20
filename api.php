@@ -12,6 +12,12 @@ $DB = new Database();
 $DATA_RAW = file_get_contents("php://input");
 $DATA_OBJ = json_decode($DATA_RAW);//make object form stringified data
 
+//to store whether the req is to refresh chat part
+$refresh=false;
+if (isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType == "chats_refresh") {
+    $refresh=true;
+}
+
 //check if logged in
 if (!isset($_SESSION['userID'])) {
     if (isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType != "login" && $DATA_OBJ->dataType != "signup") {
@@ -40,7 +46,7 @@ if (isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType == "signup") {
 } else if (isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType == "contacts") {
     //contacts
     include("includes/contacts.php");
-} else if (isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType == "chats") {
+} else if (isset($DATA_OBJ->dataType) && ($DATA_OBJ->dataType == "chats" || $DATA_OBJ->dataType == "chats_refresh")) {
     //chats
     include("includes/chats.php");
 } else if (isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType == "settings") {
@@ -121,4 +127,21 @@ function updateSession()
         $user_data['userName'] = $result->userName;
         $_SESSION['user'] = (object)$user_data;//saving user data as an obj in session
     }
+}
+
+
+//decision abt the image: should provide an object having image and gender
+function decision_about_image($user)
+{
+    $image = "";
+    if (!empty($user->image) && file_exists($user->image)) {//when image is set and exists
+        $image = $user->image;
+    } else {//when image is not set
+        if ($user->gender == 'male') {//for male users with no image
+            $image = "ui/images/male.jpg";
+        } else {//for female users with no image
+            $image = "ui/images/female.png";
+        }
+    }
+    return $image;
 }
