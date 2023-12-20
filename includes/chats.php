@@ -83,7 +83,7 @@ if (isset($DATA_OBJ->find->userID)) {
         $mydata='Previous Chats:<br>';
         foreach ($msgFromDB as $data) {
             $data->image = decision_about_image($data);
-            $mydata .= '<div id="active_contact"  userID="' . $data->userID . '" >
+            $mydata .= '<div id="active_contact"  userID="' . $data->userID . '" onclick="startChat(event)" >
             <img src="' . $data->image . '">
             ' . ucfirst($data->userName) . '</div>';
         }

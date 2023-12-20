@@ -154,7 +154,14 @@
                         break;
                     case "chats_refresh":
                         var messages_container = _("messages_container");
-                        messages_container.innerHTML=obj.messages;
+                        if(messages_container.innerHTML!=obj.messages){
+                            messages_container.innerHTML=obj.messages;
+                            //to start typing immedeiatel again and for scrolling down
+                            setTimeout(function (){
+                                messages_container.scrollTo(0, messages_container.scrollHeight);
+                                message_text.focus();
+                            },0);
+                        }
                         break;
                     case "error":
                         let error = _("error");
