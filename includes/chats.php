@@ -7,6 +7,7 @@ if (isset($DATA_OBJ->find->userID)) {
     $query = "SELECT userID,userName,image,gender FROM user WHERE userID= :userID limit 1";
     $result = $DB->read($query, ['userID' => $ChatUserID]);
 
+
     if (is_array($result)) {
         //user found
         $user = $result[0];
@@ -23,7 +24,7 @@ if (isset($DATA_OBJ->find->userID)) {
         $messages="";
         if (!$refresh) {
             $messages .= '
-<div id="messages_container_wrapper" >
+<div id="messages_container_wrapper" onclick="setSeen(event);" >
     <div id="messages_container" >
         ';
 
@@ -36,6 +37,23 @@ if (isset($DATA_OBJ->find->userID)) {
                 if ($data->sender == $_SESSION['userID']) {//when the msg was sent by the logged user
                     $messages .= message_right($data, $_SESSION['user']);//using user obj in session for user data of logged user
                 } else {//when msg is sent by the chatting user
+                    //since the logged in user now recieving the message if havent updated seen
+                    if(empty($data->received)) {
+                        $DB->write("UPDATE messages SET received=:received WHERE id=:id limit 1;", ['received' => date("Y-m-d H:i:s"), 'id' => $data->id]);
+                    }
+
+
+                    if($seen && empty($data->seen) &&  !empty($data->received) ) {
+
+                        $file = 'test.txt'; // Replace 'your_file.txt' with your file name or path
+                        $content_to_append = $seen."\n"; // Content you want to append
+                        // Append content to the file
+                        file_put_contents($file, $content_to_append, FILE_APPEND);
+
+
+
+                        $DB->write("UPDATE messages SET seen=:seen WHERE id=:id limit 1;", ['seen' => date("Y-m-d H:i:s"), 'id' => $data->id]);
+                    }
                     $messages .= message_left($data, $user);
                 }
             }
@@ -87,6 +105,8 @@ if (isset($DATA_OBJ->find->userID)) {
             <img src="' . $data->image . '">
             ' . ucfirst($data->userName) . '</div>';
         }
+    }else{
+        $mydata='You have no previous chats!';
     }
 
     $info->dataType = "chats";

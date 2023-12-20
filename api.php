@@ -14,8 +14,12 @@ $DATA_OBJ = json_decode($DATA_RAW);//make object form stringified data
 
 //to store whether the req is to refresh chat part
 $refresh=false;
+$seen=false;
 if (isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType == "chats_refresh") {
     $refresh=true;
+    if($DATA_OBJ->find->seen=="1") {
+        $seen = true;
+    }
 }
 
 //check if logged in

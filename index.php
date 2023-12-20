@@ -60,6 +60,7 @@
 
     //global variables
     var CURRENT_CHAT_USER = "";
+    var SEEN_STATUS = "0";
 
     //fuction to return element when pass the ID. for make it easy. function name is underscore
     function _(element) {
@@ -110,7 +111,7 @@
 
     function handleResult(result, type) {
         if (result.trim() != "") {
-            console.log(result);
+            // console.log(result);
             let obj = JSON.parse(result);
             if (typeof (obj.logged_in) != "undefined" && !obj.logged_in) {
                 // alert(result);
@@ -120,6 +121,7 @@
                 var inner_right_panel = _("inner_right_panel");
                 switch (obj.dataType) {
                     case "userInfo":
+                        SEEN_STATUS = "0";
                         let username = _("username");
                         let email = _("useremail");
                         let profileImage = _("profileImg");
@@ -128,10 +130,12 @@
                         email.innerHTML = obj.email;
                         break;
                     case "contacts":
+                        SEEN_STATUS = "0";
                         inner_right_panel.innerHTML = '';
                         inner_left_panel.innerHTML = obj.message;
                         break;
                     case "chats"://after sending messages, result also will come here
+                        SEEN_STATUS = "0"; //for reaffirm seen status for new messgaes
                         inner_left_panel.innerHTML = obj.user;
                         inner_right_panel.innerHTML = obj.messages;
 
@@ -145,6 +149,7 @@
                         },0);
                         break;
                     case "settings":
+                        SEEN_STATUS = "0";
                         inner_right_panel.innerHTML = '';
                         inner_left_panel.innerHTML = obj.message;
                         break;
@@ -153,9 +158,13 @@
                         get_data({}, 'settings');
                         break;
                     case "chats_refresh":
+                        SEEN_STATUS = "0";
                         var messages_container = _("messages_container");
                         if(messages_container.innerHTML!=obj.messages){
                             messages_container.innerHTML=obj.messages;
+                            //scrolling down
+                            var messages_container = _("messages_container");
+                            var message_text = _("message_text");
                             //to start typing immedeiatel again and for scrolling down
                             setTimeout(function (){
                                 messages_container.scrollTo(0, messages_container.scrollHeight);
@@ -216,9 +225,15 @@
 
     //when press enter to send message
     function pressedEnter(e) {
+        setSeen(e);
         if (e.keyCode == 13) {//when its Enter key
             send_message(e);
         }
+    }
+
+    //run this function everytime the user click on text box , so we know user has read the message
+    function setSeen(e){
+        SEEN_STATUS="1";
     }
 </script>
 
@@ -373,8 +388,15 @@
 
     //req msg every 5 sec
     setInterval(function (){
+
+
         if(CURRENT_CHAT_USER!=""){
-            get_data({"userID": CURRENT_CHAT_USER}, 'chats_refresh');
+            get_data({
+                "userID": CURRENT_CHAT_USER,
+                "seen": SEEN_STATUS
+            }, 'chats_refresh');
         }
     },5000);
+
+
 </script>
