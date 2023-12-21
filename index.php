@@ -58,6 +58,9 @@
 
 <script type="text/javascript">
 
+    var sentAudio = new Audio("message_sent.mp3");
+    var receivedAudio = new Audio("message_received.mp3");
+
     //global variables
     var CURRENT_CHAT_USER = "";
     var SEEN_STATUS = "0";
@@ -134,6 +137,8 @@
                         inner_right_panel.innerHTML = '';
                         inner_left_panel.innerHTML = obj.message;
                         break;
+                    case "send_message":
+                        sentAudio.play();
                     case "chats"://after sending messages, result also will come here
                         SEEN_STATUS = "0"; //for reaffirm seen status for new messgaes
                         inner_left_panel.innerHTML = obj.user;
@@ -160,16 +165,25 @@
                     case "chats_refresh":
                         SEEN_STATUS = "0";
                         var messages_container = _("messages_container");
-                        if(messages_container.innerHTML!=obj.messages){
-                            messages_container.innerHTML=obj.messages;
-                            //scrolling down
-                            var messages_container = _("messages_container");
-                            var message_text = _("message_text");
-                            //to start typing immedeiatel again and for scrolling down
-                            setTimeout(function (){
-                                messages_container.scrollTo(0, messages_container.scrollHeight);
-                                message_text.focus();
-                            },0);
+                        console.log(obj.newMessage)
+                        if(typeof obj.newMessage != 'undefined'){
+                            if(obj.newMessage) {
+                                // console.log(obj.newMessage)
+                                messages_container.innerHTML = obj.messages;
+                                receivedAudio.play();
+                                //scrolling down
+                                // var messages_container = _("messages_container");
+                                // var message_text = _("message_text");
+                                //to start typing immedeiatel again and for scrolling down
+                                // setTimeout(function (){
+                                //     messages_container.scrollTo(0, messages_container.scrollHeight);
+                                //     message_text.focus();
+                                // },0);
+                            }
+                        }
+                        if(messages_container.innerHTML != obj.messages){
+                            messages_container.innerHTML = obj.messages;
+
                         }
                         break;
                     case "error":
@@ -400,3 +414,4 @@
 
 
 </script>
+

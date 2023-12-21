@@ -56,7 +56,7 @@ if (is_array($result)) {
 
     $messages="";
     $messages .='
-<div id="messages_container_wrapper" >
+<div id="messages_container_wrapper" onclick="setSeen(event);">
     <div id="messages_container" >
         ';
     //left and right chats
@@ -82,7 +82,7 @@ if (is_array($result)) {
 
     $info->user = $mydata;
     $info->messages = $messages;
-    $info->dataType = "chats";
+    $info->dataType = "send_message";
     echo json_encode($info);
 
 } else {

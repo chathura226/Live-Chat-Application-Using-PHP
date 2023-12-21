@@ -21,6 +21,7 @@ if (isset($DATA_OBJ->find->userID)) {
             <img src="' . $user->image . '">
             ' . ucfirst($user->userName) . '</div>';
         }
+        $newMessage=false;
         $messages="";
         if (!$refresh) {
             $messages .= '
@@ -34,11 +35,15 @@ if (isset($DATA_OBJ->find->userID)) {
         $msgFromDB = $DB->read($query, ['sender' => $user->userID, 'receiver' => $_SESSION['userID']]);
         if (is_array($msgFromDB)) {
             foreach ($msgFromDB as $data) {
+
+
+
                 if ($data->sender == $_SESSION['userID']) {//when the msg was sent by the logged user
                     $messages .= message_right($data, $_SESSION['user']);//using user obj in session for user data of logged user
                 } else {//when msg is sent by the chatting user
                     //since the logged in user now recieving the message if havent updated seen
                     if(empty($data->received)) {
+                        $newMessage=true;
                         $DB->write("UPDATE messages SET received=:received WHERE id=:id limit 1;", ['received' => date("Y-m-d H:i:s"), 'id' => $data->id]);
                     }
 
@@ -57,6 +62,7 @@ if (isset($DATA_OBJ->find->userID)) {
             $messages .= messageControls();
         }
 
+        $info->newMessage=$newMessage;
         $info->dataType = "chats_refresh";
         if (!$refresh) {
             $info->dataType = "chats";
