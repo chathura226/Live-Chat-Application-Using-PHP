@@ -224,6 +224,14 @@
     border: solid 2px white;
     border-radius: 50%;
 }
+#message_right #trash{
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    bottom: 5px;
+    left: -20px;
+    cursor: pointer;
+}
 
 #messages_container{
     /*border: solid thin #888;*/

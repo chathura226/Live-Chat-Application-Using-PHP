@@ -415,3 +415,12 @@
 
 </script>
 
+<!--delete message-->
+<script>
+    function deleteMessage(e){
+        let ans = confirm("Are you sure you want to delete this message?");
+        if (ans) {
+
+        }
+    }
+</script>
