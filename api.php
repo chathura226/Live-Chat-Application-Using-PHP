@@ -65,6 +65,9 @@ if (isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType == "signup") {
 }else if (isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType == "delete_message") {
     //delete_message
     include("includes/delete_message.php");
+}else if (isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType == "delete_thread") {
+    //delete_thread
+    include("includes/delete_thread.php");
 }
 
 
@@ -105,7 +108,7 @@ function messageControls()
 {
     return '
     </div>
-    <span style="color: grey;cursor: pointer;">Delete this thread</span>
+    <span style="color: grey;cursor: pointer;" onclick="deleteThread(event);">Delete this thread</span>
     <div style="display: flex; height: 50px;">
     <label for="message_file"><img src="ui/icons/clip.png" style="opacity: 0.;width: 30px;margin: 5px;cursor: pointer;"></label>
     <input name="message_file" id="message_file" type="file" style="display: none;"/>

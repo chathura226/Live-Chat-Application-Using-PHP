@@ -84,7 +84,7 @@ if (isset($DATA_OBJ->find->userID)) {
     $query = "SELECT messages.receiver as userID, user.userName, user.image, user.online, user.gender
                 FROM messages
                          JOIN user ON messages.receiver = user.userID
-                WHERE messages.sender = :userID
+                WHERE messages.sender = :userID AND messages.deleted_sender=0
                 GROUP BY messages.receiver, user.userName, user.image, user.online, user.gender
                 
                 UNION
@@ -92,7 +92,7 @@ if (isset($DATA_OBJ->find->userID)) {
                 SELECT messages.sender as userID, user.userName, user.image, user.online, user.gender
                 FROM messages
                          JOIN user ON messages.sender = user.userID
-                WHERE messages.receiver = :userID
+                WHERE messages.receiver = :userID AND messages.deleted_receiver=0
                 GROUP BY messages.sender, user.userName, user.image, user.online, user.gender;
                 ";
     $msgFromDB = $DB->read($query, ['userID' => $_SESSION['userID']]);

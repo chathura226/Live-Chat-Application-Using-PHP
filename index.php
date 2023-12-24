@@ -455,4 +455,21 @@
             }, 'chats_refresh');
         }
     }
+
+    function deleteThread(e){
+        let ans = confirm("Are you sure you want to delete this thread? Note that the message will be deleted only from your side.");
+        if (ans) {
+
+            //sending delete delete_thread req
+            get_data({
+                userID:CURRENT_CHAT_USER
+            },"delete_thread");
+
+            //then refresh chat
+            get_data({
+                "userID": CURRENT_CHAT_USER,
+                "seen": SEEN_STATUS
+            }, 'chats_refresh');
+        }
+    }
 </script>
