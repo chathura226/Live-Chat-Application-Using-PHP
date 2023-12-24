@@ -150,7 +150,7 @@
 
 /*//messages*/
 #message_left{
-    height: 70px;
+    /*height: 70px;*/
     margin: 10px;
     padding: 2px;
     padding-right: 8px;
@@ -165,7 +165,7 @@
     width: 60%;
     min-width: 200px;
 }
-#message_left img{
+#message_left .profileImage{
     width: 60px;
     height: 60px;
     float: left;
@@ -197,7 +197,7 @@
 
 
 #message_right{
-    height: 70px;
+    /*height: 70px;*/
     margin: 10px;
     padding: 2px;
     padding-right: 8px;
@@ -212,7 +212,7 @@
     width: 60%;
     min-width: 200px;
 }
-#message_right img{
+#message_right .profileImage{
     width: 60px;
     height: 60px;
     float: left;

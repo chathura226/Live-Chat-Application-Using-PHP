@@ -119,6 +119,7 @@
     }
 
     function handleResult(result, type) {
+        console.log(result);
         if (result.trim() != "") {
             let obj = JSON.parse(result);
 
@@ -205,6 +206,7 @@
                             error_alert.style.display = "none";
                         }, 5000); // 5000 milliseconds = 5 seconds
                         break;
+                    case "send_image":
                     case "success":
                         let success_alert = _("success_alert");
                         success_alert.querySelector('h3').innerHTML = obj.message;
@@ -471,5 +473,40 @@
                 "seen": SEEN_STATUS
             }, 'chats_refresh');
         }
+    }
+</script>
+
+<!--file upload (image upload)-->
+<script>
+    function sendImages(files){
+        let file=files[0];
+        // console.log(files[0].name);
+        let xml = new XMLHttpRequest();
+        let myForm = new FormData();
+
+        //listening
+        xml.onload = function () {
+            //readyState 4 means data got as a response successfully
+            //200 means everything is good
+            if (xml.readyState === 4 || xml.status === 200) {
+                alert(xml.responseText);
+                handleResult(xml.responseText);
+                //then refresh chat
+                get_data({
+                    "userID": CURRENT_CHAT_USER,
+                    "seen": SEEN_STATUS
+                }, 'chats_refresh');
+            }
+        }
+
+        myForm.append('file', file);
+        myForm.append('userID', CURRENT_CHAT_USER);
+        myForm.append('dataType', "send_image");
+        //sending
+        //true for asynchronous
+        xml.open("POST", "uploader.php", true);
+        xml.send(myForm);
+
+
     }
 </script>
