@@ -114,7 +114,7 @@
 
     function handleResult(result, type) {
         if (result.trim() != "") {
-            // console.log(result);
+            console.log(result);
             let obj = JSON.parse(result);
             if (typeof (obj.logged_in) != "undefined" && !obj.logged_in) {
                 // alert(result);
@@ -417,10 +417,20 @@
 
 <!--delete message-->
 <script>
-    function deleteMessage(e){
+    function deleteMessage(e,messageID=null){
         let ans = confirm("Are you sure you want to delete this message?");
         if (ans) {
 
+            //sending delete
+            get_data({
+                rowID:messageID
+            },"delete_message");
+
+            //then refresh chat
+            get_data({
+                "userID": CURRENT_CHAT_USER,
+                "seen": SEEN_STATUS
+            }, 'chats_refresh');
         }
     }
 </script>
