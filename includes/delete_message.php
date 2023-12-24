@@ -28,9 +28,13 @@ WHERE
 $result = $DB->write($query, $arr);
 
 if($result>0){
-    echo "deleted";
+    $info->message = "Message Deleted Successfully!";
+    $info->dataType = "success";
+    echo json_encode($info);
 }else{
-    echo "false";
+    $info->message = "Error occurred while deleting!";
+    $info->dataType = "alert";
+    echo json_encode($info);
 }
 
 

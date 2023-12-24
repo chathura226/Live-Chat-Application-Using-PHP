@@ -8,6 +8,12 @@
 </head>
 
 <body>
+<div class=" alert-success" id="success_alert">
+    <h3></h3>
+</div>
+<div class=" alert alert-danger" id="error_alert">
+    <h3></h3>
+</div>
 <div id="wrapper">
     <div id="left_panel">
         <div id="user_info" style="padding: 10px;">
@@ -114,8 +120,8 @@
 
     function handleResult(result, type) {
         if (result.trim() != "") {
-            // console.log(result);
             let obj = JSON.parse(result);
+
             if (typeof (obj.logged_in) != "undefined" && !obj.logged_in) {
                 // alert(result);
                 window.location = "login.php";
@@ -165,7 +171,7 @@
                     case "chats_refresh":
                         SEEN_STATUS = "0";
                         var messages_container = _("messages_container");
-                        console.log(obj.newMessage)
+                        // console.log(obj.newMessage)
                         if(typeof obj.newMessage != 'undefined'){
                             if(obj.newMessage) {
                                 // console.log(obj.newMessage)
@@ -190,6 +196,22 @@
                         let error = _("error");
                         error.innerHTML = obj.message;
                         error.style.display = "block";
+                        break;
+                    case "alert":
+                        let error_alert = _("error_alert");
+                        error_alert.querySelector('h3').innerHTML = obj.message;
+                        error_alert.style.display = "inline-flex";
+                        setTimeout(function() {
+                            error_alert.style.display = "none";
+                        }, 5000); // 5000 milliseconds = 5 seconds
+                        break;
+                    case "success":
+                        let success_alert = _("success_alert");
+                        success_alert.querySelector('h3').innerHTML = obj.message;
+                        success_alert.style.display = "inline-flex";
+                        setTimeout(function() {
+                            success_alert.style.display = "none";
+                        }, 5000); // 5000 milliseconds = 5 seconds
                         break;
 
                 }
