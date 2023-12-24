@@ -114,7 +114,7 @@
 
     function handleResult(result, type) {
         if (result.trim() != "") {
-            console.log(result);
+            // console.log(result);
             let obj = JSON.parse(result);
             if (typeof (obj.logged_in) != "undefined" && !obj.logged_in) {
                 // alert(result);
@@ -418,7 +418,7 @@
 <!--delete message-->
 <script>
     function deleteMessage(e,messageID=null){
-        let ans = confirm("Are you sure you want to delete this message?");
+        let ans = confirm("Are you sure you want to delete this message? Note that the message will be deleted only from your side.");
         if (ans) {
 
             //sending delete

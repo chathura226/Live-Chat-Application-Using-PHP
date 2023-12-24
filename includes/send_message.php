@@ -63,8 +63,8 @@ if (is_array($result)) {
 
     //reading from db
     $msgID=$arr['msgID'];
-    $query = "SELECT * FROM messages WHERE msgID=:msgID ORDER BY id ASC";
-    $msgFromDB = $DB->read($query,['msgID'=>$msgID]);
+    $query = "SELECT * FROM messages WHERE (msgID=:msgID && receiver=:userID && deleted_receiver=0) || (msgID=:msgID && sender=:userID && deleted_sender=0) ORDER BY id ASC";
+    $msgFromDB = $DB->read($query,['msgID'=>$msgID,'userID'=>$_SESSION['userID']]);
     if(is_array($msgFromDB)){
         foreach ($msgFromDB as $data){
             if($data->sender==$_SESSION['userID']){//when the msg was sent by the logged user

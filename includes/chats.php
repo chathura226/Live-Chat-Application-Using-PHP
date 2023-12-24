@@ -31,7 +31,7 @@ if (isset($DATA_OBJ->find->userID)) {
 
         }
         //left and right msgs from db
-        $query = "SELECT * FROM messages WHERE (sender= :sender && receiver=:receiver) || (sender= :receiver && receiver=:sender) ORDER BY id ASC";
+        $query = "SELECT * FROM messages WHERE (sender= :sender && receiver=:receiver && deleted_receiver=0) || (sender= :receiver && receiver=:sender && deleted_sender=0) ORDER BY id ASC";
         $msgFromDB = $DB->read($query, ['sender' => $user->userID, 'receiver' => $_SESSION['userID']]);
         if (is_array($msgFromDB)) {
             foreach ($msgFromDB as $data) {
