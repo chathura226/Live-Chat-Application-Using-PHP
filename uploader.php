@@ -40,7 +40,7 @@ if(isset($_FILES['file']) && $_FILES['file']['name']!="" ){
         }
         $destination=$folder.time()."_".$_FILES['file']['name'];
         move_uploaded_file($fileName,$destination);
-        $info->message="Image Uploaded Successfully!";
+        $info->message="File Uploaded Successfully!";
         $info->dataType=$dataType;
         echo json_encode($info);
     }
@@ -58,7 +58,7 @@ if($dataType=="change_profile_image"){
 }else if($dataType=="send_image"){
 
     //arr array to store data for prepared statement
-    $arr['message']="File";
+    $arr['message']="";
     $arr['date']=date("Y-m-d H:i:s");
     $arr['sender']=$_SESSION['userID'];
     $arr['receiver']=$_POST['userID'];
