@@ -17,9 +17,15 @@ Nexus Chat is a real-time messaging application built using PHP as the server-si
 
 ## Steps to run
 - Move inside of docker folder
-- In terminal run the command "./livechat.sh up".
-- Above command will use docker-compose up and chat application will run on localhost:80 and phpMyAdmin on localhost:8001
-- To stop and dump the database for saving, run the command "./livechat.sh down" 
+- In terminal run the command below.
+  ```
+  ./livechat.sh up
+  ```
+- Above command will use "docker-compose up" and chat application will run on localhost:80 and phpMyAdmin on localhost:8001
+- To stop and dump the database for saving, run the command below.
+   ```
+  ./livechat.sh down
+  ```
 - This will dump the database into the 'db' folder which will be used when you run the app again.
 
 ## Some Screenshots
