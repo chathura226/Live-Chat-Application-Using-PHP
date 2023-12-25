@@ -11,12 +11,11 @@ $result = $DB->read($query, $data);
 
 if (is_array($result)) {
     $result=$result[0];//since results will be an array of data
-    if($result->password==$DATA_OBJ->password){
+    if(password_verify($DATA_OBJ->password,$result->password)){
         //valid credentials.
         //checking if user trying to change password
         if(!empty($DATA_OBJ->newPassword)){ // user want to change password
-            $data['password']=$DATA_OBJ->newPassword;
-
+            $data['password']=password_hash($DATA_OBJ->newPassword, PASSWORD_DEFAULT);
             if (strlen($DATA_OBJ->newPassword)<8){
                 $error .= "Password must be at least 8 characters long! <br>";
             }

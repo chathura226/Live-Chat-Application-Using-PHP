@@ -51,6 +51,8 @@ if(empty($DATA_OBJ->gender)){
 
 
 if($error=="") {
+    //hashing
+    $data['password']=password_hash($data['password'], PASSWORD_DEFAULT);
     $query = "INSERT INTO user (userID,userName,email,password,createdAt,gender) values (:userID,:userName,:email,:password,:createdAt,:gender) ";
     $result = $DB->write($query, $data);
 

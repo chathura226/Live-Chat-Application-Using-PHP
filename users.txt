@@ -1,0 +1,13 @@
+email: penny@mychat.com
+pass : penny123
+
+email: chathura@mychat.com
+pass : chathura
+
+
+email: amy@mychat.com
+pass : amy@mychat
+
+email: sheldon@mychat.com
+pass : sheldon123
+

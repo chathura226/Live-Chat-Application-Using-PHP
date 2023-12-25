@@ -17,7 +17,7 @@ if($error=="") {
 
     if (is_array($result)) {
         $result=$result[0];//since results will be an array of data
-        if($result->password==$DATA_OBJ->password){
+        if(password_verify($DATA_OBJ->password,$result->password)){
             //saving essential user Info
             $_SESSION['userID']=$result->userID;
 

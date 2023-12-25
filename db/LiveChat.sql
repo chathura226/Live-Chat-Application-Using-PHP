@@ -16,6 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Temporary view structure for view `UnreceivedMessages`
+--
+
+DROP TABLE IF EXISTS `UnreceivedMessages`;
+/*!50001 DROP VIEW IF EXISTS `UnreceivedMessages`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `UnreceivedMessages` AS SELECT 
+ 1 AS `id`,
+ 1 AS `sender`,
+ 1 AS `receiver`,
+ 1 AS `message`,
+ 1 AS `files`,
+ 1 AS `msgID`,
+ 1 AS `date`,
+ 1 AS `seen`,
+ 1 AS `received`,
+ 1 AS `deleted_sender`,
+ 1 AS `deleted_receiver`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `messages`
 --
 
@@ -41,7 +63,7 @@ CREATE TABLE `messages` (
   KEY `seen` (`seen`),
   CONSTRAINT `receiver-user` FOREIGN KEY (`receiver`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `sender-user` FOREIGN KEY (`sender`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,7 +72,7 @@ CREATE TABLE `messages` (
 
 LOCK TABLES `messages` WRITE;
 /*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` VALUES (1,1785330596582574,1784876893826717,'Hello there',NULL,'YjomPztzkNn','2023-12-18 14:24:53',NULL,NULL,0,0),(2,1785330596582574,1784876893826717,'Genaral Kenobi',NULL,'YjomPztzkNn','2023-12-18 14:25:28',NULL,NULL,0,0),(3,1785330596582574,1785330631135612,'hello john',NULL,'SFOWudmZwEdfDQUBpUvcRjgCpH0ONijuY','2023-12-18 14:26:03',NULL,NULL,0,0),(4,1785330631135612,1785330596582574,'hello mary',NULL,'SFOWudmZwEdfDQUBpUvcRjgCpH0ONijuY','2023-12-18 14:26:33',NULL,NULL,0,0),(5,1785330631135612,1785330596582574,'hru?',NULL,'SFOWudmZwEdfDQUBpUvcRjgCpH0ONijuY','2023-12-18 14:30:06',NULL,NULL,0,0),(6,1785330631135612,1785330596582574,'xsxs',NULL,'SFOWudmZwEdfDQUBpUvcRjgCpH0ONijuY','2023-12-18 14:35:07',NULL,NULL,0,0),(7,1785330631135612,1785330596582574,'helooooooooooo',NULL,'SFOWudmZwEdfDQUBpUvcRjgCpH0ONijuY','2023-12-18 14:35:57',NULL,NULL,0,0),(8,1785330631135612,1784877035723461,'hi emily',NULL,'eVYpgWqwPiNFlU7GjMx3vquuDtr6U3qZ5MramJ','2023-12-18 14:51:44',NULL,NULL,0,0),(9,1784877035723461,1785330631135612,'hi johnny',NULL,'eVYpgWqwPiNFlU7GjMx3vquuDtr6U3qZ5MramJ','2023-12-18 14:52:23',NULL,NULL,0,0),(10,1785330631135612,1785330596582574,'dewdw',NULL,'SFOWudmZwEdfDQUBpUvcRjgCpH0ONijuY','2023-12-18 15:08:20',NULL,NULL,0,0),(11,1785330631135612,1785330596582574,'dwed',NULL,'SFOWudmZwEdfDQUBpUvcRjgCpH0ONijuY','2023-12-18 15:08:21',NULL,NULL,0,0),(12,1785330631135612,1785330596582574,'dweded',NULL,'SFOWudmZwEdfDQUBpUvcRjgCpH0ONijuY','2023-12-18 15:08:23',NULL,NULL,0,0),(13,1785330631135612,1785330596582574,'dw',NULL,'SFOWudmZwEdfDQUBpUvcRjgCpH0ONijuY','2023-12-18 15:08:24',NULL,NULL,0,0),(14,1785330631135612,1785330596582574,'dw',NULL,'SFOWudmZwEdfDQUBpUvcRjgCpH0ONijuY','2023-12-18 15:08:39',NULL,NULL,0,0),(15,1785330631135612,1785330596582574,'dfre',NULL,'SFOWudmZwEdfDQUBpUvcRjgCpH0ONijuY','2023-12-18 15:08:43',NULL,NULL,0,0),(16,1785330631135612,1785330596582574,'er',NULL,'SFOWudmZwEdfDQUBpUvcRjgCpH0ONijuY','2023-12-18 15:08:48',NULL,NULL,0,0),(17,1785330631135612,1785330596582574,'testttttttttt',NULL,'SFOWudmZwEdfDQUBpUvcRjgCpH0ONijuY','2023-12-18 15:09:19',NULL,NULL,0,0),(18,1785330596582574,1785330631135612,'cds',NULL,'SFOWudmZwEdfDQUBpUvcRjgCpH0ONijuY','2023-12-18 15:11:40',NULL,NULL,0,0),(19,1785330596582574,1784877035723461,'hi',NULL,'2l12KzDEcCvzIdGNrbRBY','2023-12-18 15:47:32',NULL,NULL,0,0),(20,1785330596582574,1784877035723461,'hello',NULL,'2l12KzDEcCvzIdGNrbRBY','2023-12-18 15:54:36',NULL,NULL,0,0),(21,1785330596582574,1784877035723461,'ujfr',NULL,'2l12KzDEcCvzIdGNrbRBY','2023-12-18 15:57:12',NULL,NULL,0,0),(22,1785330596582574,1784877035723461,'cha',NULL,'2l12KzDEcCvzIdGNrbRBY','2023-12-18 15:59:02',NULL,NULL,0,0),(23,1785330596582574,1784877035723461,'hdbje',NULL,'2l12KzDEcCvzIdGNrbRBY','2023-12-18 15:59:03',NULL,NULL,0,0),(24,1785330596582574,1784877035723461,'dmek',NULL,'2l12KzDEcCvzIdGNrbRBY','2023-12-18 15:59:04',NULL,NULL,0,0);
+INSERT INTO `messages` VALUES (1,1786231207168972,1786231049212840,'hi amy',NULL,'qVvaacDIJHzxf4zq78ciFnHwZpZj0','2023-12-25 05:41:31',NULL,NULL,0,0),(2,1786231207168972,1786230633044465,'hello',NULL,'KpghZS04Q5JubR6r8J8oNI','2023-12-25 05:41:42',NULL,NULL,0,0),(3,1786230848584796,1786231207168972,'Did you change the wifi password?',NULL,'vJmJ2DKoE','2023-12-25 05:42:12','2023-12-25 05:43:07','2023-12-25 05:43:00',0,0),(4,1786231207168972,1786230848584796,'yes. its \"You already eat our food, you can pay for your own wifi\"',NULL,'vJmJ2DKoE','2023-12-25 05:43:30','2023-12-25 05:44:08','2023-12-25 05:43:33',0,0),(5,1786231207168972,1786230848584796,'no spaces',NULL,'vJmJ2DKoE','2023-12-25 05:43:36','2023-12-25 05:44:08','2023-12-25 05:43:38',0,0),(6,1786230848584796,1786231207168972,'','uploads/1703483134_download.jpeg','vJmJ2DKoE','2023-12-25 05:45:34',NULL,'2023-12-25 05:45:43',0,0);
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,7 +99,7 @@ CREATE TABLE `user` (
   KEY `email` (`email`),
   KEY `createdAt` (`createdAt`),
   KEY `online` (`online`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -86,9 +108,27 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,1784876893826717,'chathura','cc@gmail.com','111','ui/images/user1.jpg','2023-12-10 06:54:11',NULL,'male'),(2,1784876924563059,'hima','jj','111k',NULL,'2023-12-10 06:54:40',NULL,'female'),(3,1784877035723461,'emily','emily@gmail.com','111','uploads/1702911150_chathura.jpg','2023-12-10 06:56:26',NULL,'female'),(4,1785181186615298,'chathura226','nhv@gmail.com','12345678',NULL,'2023-12-13 15:30:47',NULL,'male'),(5,1785330596582574,'mary','mary@yahoo.com','password123','uploads/1702774504_1701703835-Screenshot from 2023-11-26 19-32-20.png','2023-12-15 07:05:36',NULL,'female'),(6,1785330631135612,'john','john@yahoo.com','password','uploads/1702910628_terminal.jpg','2023-12-15 07:06:09',NULL,'male');
+INSERT INTO `user` VALUES (7,1786230633044465,'chathura226','chathura@mychat.com','$2y$10$nn03rdpld4kyoo5EdEJlKOlEiXd7urwQZWuNCDE9BYzwapL889af6','uploads/1703482406_images.jpeg','2023-12-25 05:31:17',NULL,'male'),(8,1786230848584796,'Penny256','penny@mychat.com','$2y$10$h0k7M7CW4X3uX2l4gVvh3.ok5g7h6gMOsR1lDUuPZrTyRRUzATpga','uploads/1703482601_big-bang-theory-penny-kaley-cuoco-1632400651.jpeg','2023-12-25 05:34:43',NULL,'female'),(9,1786231049212840,'amy99','amy@mychat.com','$2y$10$NuPo2PLi6x7zyloSYTdiKeGpQTmXxE7359eKhTgHZE14BFitaqAzC','uploads/1703482760_Screenshot from 2023-12-25 11-09-13.png','2023-12-25 05:37:54',NULL,'female'),(10,1786231207168972,'sheldon99','sheldon@mychat.com','$2y$10$GASBcpNdTcuXVqH1FqmIdehDeK76PfZqInuNqboiVQb5jRgTArgNK','uploads/1703482879_Screenshot from 2023-12-25 11-11-15.png','2023-12-25 05:40:25',NULL,'male');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Final view structure for view `UnreceivedMessages`
+--
+
+/*!50001 DROP VIEW IF EXISTS `UnreceivedMessages`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`admin`@`%` SQL SECURITY DEFINER */
+/*!50001 VIEW `UnreceivedMessages` AS select `messages`.`id` AS `id`,`messages`.`sender` AS `sender`,`messages`.`receiver` AS `receiver`,`messages`.`message` AS `message`,`messages`.`files` AS `files`,`messages`.`msgID` AS `msgID`,`messages`.`date` AS `date`,`messages`.`seen` AS `seen`,`messages`.`received` AS `received`,`messages`.`deleted_sender` AS `deleted_sender`,`messages`.`deleted_receiver` AS `deleted_receiver` from `messages` where (`messages`.`received` is null) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -99,4 +139,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-18 16:00:56
+-- Dump completed on 2023-12-25  5:47:45

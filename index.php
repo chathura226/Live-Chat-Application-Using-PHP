@@ -496,7 +496,7 @@
             //readyState 4 means data got as a response successfully
             //200 means everything is good
             if (xml.readyState === 4 || xml.status === 200) {
-                alert(xml.responseText);
+                // alert(xml.responseText);
                 handleResult(xml.responseText);
                 //then refresh chat
                 get_data({
