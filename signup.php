@@ -10,7 +10,7 @@
 <body>
 <div id="wrapper">
     <div class="header">
-        My Chat
+        Nexus Chat
         <div style="font-size: 20px; font-family: myFont;">Signup <br><br></div>
     </div>
     <div id="error" class="alert alert-danger">
