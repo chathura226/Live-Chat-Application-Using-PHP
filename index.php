@@ -38,12 +38,11 @@
 
     </div>
     <div id="right_panel">
-        <div>
+
             <!--loader-->
             <div id="loader-con" class="loader-off"><img src="ui/icons/giphy.gif" alt="loader"></div>
             <div id="imageViewer" class="imageViewer_off" onclick="closeImage(event);"></div>
 
-        </div>
         <div id="container" style="display: flex;">
 
 

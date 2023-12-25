@@ -317,14 +317,15 @@
 }
 
 .imageViewer_on{
-    position: absolute;
+    position:fixed;
     height: 400px;
     width: 400px;
     margin: auto;
     background-color: black;
     z-index: 100;
-    top:50px;
-    left: 50px;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     cursor: pointer;
 
 }
