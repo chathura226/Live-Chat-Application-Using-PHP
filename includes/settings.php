@@ -82,7 +82,7 @@ if (is_array($data)) {
     @keyframes appear {
         0%{
             opacity: 0;
-            transform: translateX(50px);
+            transform: translateX(-100px);
         }
         
         100%{
