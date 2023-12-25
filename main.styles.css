@@ -21,7 +21,7 @@
 }
 
 #left_panel {
-    min-height: 500px;
+    height: 700px;
     background-color: #27344b;
     flex: 1;
     text-align: center;
@@ -57,10 +57,11 @@
 
 
 #right_panel {
-    min-height: 400px;
-    background-color: green;
+    height: 700px;
+    background-color: white;
     flex: 4;
     text-align: center;
+    border: grey solid thin;
 }
 
 #header {
@@ -77,17 +78,18 @@
 }
 
 #inner_left_panel {
-    background-color: #383e48;
+    background-color: white;
     flex: 1;
-    min-height: 430px;
-    max-height: 630px;
+    height: 700px;
+    border-right: grey solid thin;
+    border-bottom: grey solid thin;
+    color: black;
 }
 
 #inner_right_panel {
     background-color: white;
     flex: 2;
-    min-height: 430px;
-    max-height: 630px;
+    height: 650px;
     transition: all 1.5s ease;
 }
 
@@ -115,20 +117,38 @@
     height: 70px;
     margin: 10px;
     border: solid thin #aaa;
-    padding: 2px;
+    padding: 5px;
     background-color: #eee;
     color: #444;
     cursor: pointer;
+    border-radius: 9px;
 }
 
 #active_contact img{
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     float: left;
     margin: 2px;
-
+    border-radius: 5px;
 }
 
+#notActive_contact{
+    height: 70px;
+    margin: 10px;
+    border: solid thin #aaa;
+    padding: 5px;
+    background-color: white;
+    color: #444;
+    cursor: pointer;
+    border-radius: 9px;
+}
+#notActive_contact img{
+    width: 60px;
+    height: 60px;
+    float: left;
+    margin: 2px;
+    border-radius: 5px;
+}
 .loader-on{
     display: flex;
     flex-direction: column;
@@ -356,7 +376,7 @@
 }
 
 #chat_header{
-    max-height: 50px;
+    height: 50px;
     background-color: white;
     color: black !important;
     border: grey solid thin;
