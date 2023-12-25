@@ -5,7 +5,7 @@ FROM user u
 LEFT JOIN (
     SELECT *
     FROM messages
-    WHERE received IS NULL
+    WHERE received IS NULL AND receiver=:userID
 ) AS m ON u.userID = m.sender
 WHERE u.userID != :userID
 GROUP BY u.userID, u.userName, u.image, u.gender;
