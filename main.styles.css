@@ -84,7 +84,7 @@
 }
 
 #inner_right_panel {
-    background-color: #f2f7f8;
+    background-color: white;
     flex: 2;
     min-height: 430px;
     max-height: 630px;
@@ -243,8 +243,11 @@
 
 #messages_container{
     /*border: solid thin #888;*/
+    display: inline-flex;
+    flex-direction: column;
     height: 578px;
     overflow-y: scroll;
+    width: 100%;
 }
 
 #messages_container_wrapper{
@@ -308,4 +311,46 @@
 
 .imageViewer_off{
     display: none;
+}
+
+
+/*new styles...............................................*/
+.newMessage-left{
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: stretch;
+    color: black;
+    margin: 10px;
+
+}
+.newMessage-right{
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: stretch;
+    color: black;
+    float: right;
+    margin: 10px;
+    justify-content: flex-end;
+}
+.profilePic{
+    margin-top: 8px;
+    width: 40px;
+    height: 40px;
+    border-radius: 8.333px;
+    /* background: lightgray 50% / cover no-repeat; */
+}
+
+.eachMsg{
+    display: flex;
+    padding: 8px 16px;
+    align-items: flex-start;
+    gap: 10px;
+    background-color: #F1F1F1;
+    color: black;
+    width: fit-content;
+    border-radius: 9px;
+    max-width: 300px;
+    margin: 3px;
 }
