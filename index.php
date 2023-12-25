@@ -41,6 +41,7 @@
         <div id="header">
             <!--loader-->
             <div id="loader-con" class="loader-off"><img src="ui/icons/giphy.gif" alt="loader"></div>
+            <div id="imageViewer" class="imageViewer_off" onclick="closeImage(event);"></div>
             My Chat
         </div>
         <div id="container" style="display: flex;">
@@ -508,5 +509,21 @@
         xml.send(myForm);
 
 
+    }
+</script>
+
+<!--imageViewer-->
+<script>
+    function closeImage(e){
+        let imageViewer=_("imageViewer");
+
+        imageViewer.className="imageViewer_off";
+    }
+
+    function image_show(e){
+        let imageViewer=_("imageViewer");
+        var image=e.target.src;
+        imageViewer.innerHTML="<img src='"+image+"' style='width:100%' />"
+        imageViewer.className="imageViewer_on";
     }
 </script>

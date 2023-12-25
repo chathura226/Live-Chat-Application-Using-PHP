@@ -80,11 +80,11 @@ function message_left($data, $user)
             <img class="profileImage" src="' . $user->image . '">
             <b>' . ucfirst($user->userName) . '</b><br>
                  ' . $data->message;
-    if (!empty($data->files)) {
+    if (!empty($data->files) && file_exists($data->files)) {
         $file_extension = pathinfo($data->files, PATHINFO_EXTENSION);
         $file_extension = strtolower($file_extension);
         if ($file_extension == 'jpg' || $file_extension == 'jpeg' || $file_extension == 'png') {
-            $result .= '<br><br><img src="' . $data->files . '" style="max-width: 100%; "> <br><br>';
+            $result .= '<br><br><img src="' . $data->files . '" style="max-width: 100%; cursor: pointer;" onclick="image_show(event);"> <br><br>';
         } else {
             $result .= '<br><br><a href="' . $data->files . '" >Download the file from here <svg xmlns="http://www.w3.org/2000/svg" height="16" width="12" viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM216 232V334.1l31-31c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-72 72c-9.4 9.4-24.6 9.4-33.9 0l-72-72c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l31 31V232c0-13.3 10.7-24 24-24s24 10.7 24 24z"/></svg></a> <br><br>';
         }
@@ -114,11 +114,11 @@ function message_right($data, $user)
             <b>' . ucfirst($user->userName) . '</b><br>
                  ' . $data->message;
 
-    if (!empty($data->files)) {
+    if (!empty($data->files) && file_exists($data->files)) {
         $file_extension = pathinfo($data->files, PATHINFO_EXTENSION);
         $file_extension = strtolower($file_extension);
         if ($file_extension == 'jpg' || $file_extension == 'jpeg' || $file_extension == 'png') {
-            $result .= '<br><br><img src="' . $data->files . '" style="max-width: 100%; "> <br><br>';
+            $result .= '<br><br><img src="' . $data->files . '" style="max-width: 100%; cursor: pointer; " onclick="image_show(event);"> <br><br>';
         } else {
             $result .= '<br><br><a href="' . $data->files . '" >Download the file from here <svg xmlns="http://www.w3.org/2000/svg" height="16" width="12" viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM216 232V334.1l31-31c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-72 72c-9.4 9.4-24.6 9.4-33.9 0l-72-72c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l31 31V232c0-13.3 10.7-24 24-24s24 10.7 24 24z"/></svg></a> <br><br>';
         }
