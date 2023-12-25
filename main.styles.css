@@ -354,3 +354,21 @@
     max-width: 300px;
     margin: 3px;
 }
+
+#chat_header{
+    max-height: 50px;
+    background-color: white;
+    color: black !important;
+    border: grey solid thin;
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+.delete_thread{
+    position: absolute;
+    right: 20px;
+}

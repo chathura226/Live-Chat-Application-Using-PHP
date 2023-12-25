@@ -112,7 +112,7 @@ function message_right($data, $user)
     $result = '    <div class="newMessage-right">
         <div style="display: flex;flex-direction: column;">
             <span style="align-self:flex-end;">' . ucfirst($user->userName) . '</span>
-            <div style="align-self:flex-end;" class="eachMsg">' . $data->message;
+            <div style="align-self:flex-end;background-color: #615EF0;color: white;" class="eachMsg">' . $data->message;
 
     if (!empty($data->files) && file_exists($data->files)) {
         $file_extension = pathinfo($data->files, PATHINFO_EXTENSION);
@@ -140,7 +140,7 @@ function messageControls()
 {
     return '
     </div>
-    <span style="color: grey;cursor: pointer;" onclick="deleteThread(event);">Delete this thread</span>
+    
     <div style="display: flex; height: 50px;">
     <label for="message_file"><img src="ui/icons/clip.png" style="opacity: 0.;width: 30px;margin: 5px;cursor: pointer;"></label>
     <input name="message_file" onchange="sendImages(this.files)" id="message_file" type="file" style="display: none;"/>
