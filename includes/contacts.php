@@ -1,6 +1,17 @@
 <?php
 $myID=$_SESSION['userID'];
-$query = "SELECT userID,userName,image,gender FROM user WHERE userID!= :userID";
+$query = "SELECT u.userID, u.userName, u.image, u.gender, COUNT(m.id) AS unread_count
+FROM user u
+LEFT JOIN (
+    SELECT *
+    FROM messages
+    WHERE received IS NULL
+) AS m ON u.userID = m.sender
+WHERE u.userID != :userID
+GROUP BY u.userID, u.userName, u.image, u.gender;
+";
+
+
 $result = $DB->read($query, ['userID'=>$myID]);
 
 if (is_array($result)) {
@@ -27,7 +38,7 @@ if (is_array($result)) {
         transform: scale(1.1);
     }
 </style>
-    <div style="text-align: center; animation: appear 0.9s ease;">';
+    <div style="text-align: center;">';
 
     foreach ($result as $user) {
         $image = "";
@@ -41,9 +52,14 @@ if (is_array($result)) {
             }
         }
 
-        $mydata .= '    <div id="contact"  userID="'.$user->userID.'" onclick="startChat(event)">
+        $mydata .= '    <div id="contact" style="position:relative;" userID="'.$user->userID.'" onclick="startChat(event)">
         <img src="' . $image . '">
-        <br>' . ucfirst($user->userName) . '</div>';
+        <br>' . ucfirst($user->userName);
+
+        if($user->unread_count>0) {
+            $mydata .= '<div style="width: 20px;height: 20px;border-radius: 50%;background-color: orange;color: white;position: absolute;left: -5px;top: -5px;">'.$user->unread_count.'</div>';
+        }
+        $mydata.='</div>';
     }
 
     $mydata .= '</div>';

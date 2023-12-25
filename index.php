@@ -428,12 +428,18 @@
     //req msg every 5 sec
     setInterval(function (){
 
-
-        if(CURRENT_CHAT_USER!=""){
+        //refresh chat
+        var radio_chat=_("radio_chat");
+        if(CURRENT_CHAT_USER!="" && radio_chat.checked){
             get_data({
                 "userID": CURRENT_CHAT_USER,
                 "seen": SEEN_STATUS
             }, 'chats_refresh');
+        }
+
+        var radio_contacts=_("radio_contacts");
+        if(radio_contacts.checked){
+            get_data({},"contacts");
         }
     },5000);
 
