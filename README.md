@@ -6,6 +6,7 @@ Nexus Chat is a real-time messaging application built using PHP as the server-si
 - Real-time chat updates.
 - Shows whether the receiver has seen the message or the message has been delivered.
 - Shows the number of unread new messages
+- Dockerized for easier deployment
 - Sound effects for sending messages and receiving messages.
 - Signup and Login system with authentication and validations.
 - Change password and other profile settings
@@ -13,7 +14,14 @@ Nexus Chat is a real-time messaging application built using PHP as the server-si
 - Drag and Drop uploading
 - Error handling with an alert system
 - Message deletion and thread deletion
-    
+
+## Steps to run
+- Move inside of docker folder
+- In terminal run the command "./livechat.sh up".
+- Above command will use docker-compose up and chat application will run on localhost:80 and phpMyAdmin on localhost:8001
+- To stop and dump the database for saving, run the command "./livechat.sh down" 
+- This will dump the database into the 'db' folder which will be used when you run the app again.
+
 ## Some Screenshots
 Main chat area
 ![Screenshot from 2023-12-25 22-24-25](https://github.com/chathura226/Live-Chat-Application-Using-PHP/assets/85506006/577c42cf-6fe9-4368-93e3-79644f606e72)
